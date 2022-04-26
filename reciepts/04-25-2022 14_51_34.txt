@@ -1,0 +1,42 @@
+****************
+04-25-2022 14_51_34
+***************
+Title: 1984
+Author: george orwell
+Barcode: 1
+Price: 15.99
+Stock Left: 0
+***************
+Title: to kill a mockingbird
+Author: harper lee
+Barcode: 2
+Price: 12.99
+Stock Left: 5
+***************
+Title: brave new world
+Author: aldous huxley
+Barcode: 4
+Price: 19.0
+Stock Left: 14
+***************
+Title: the little prince
+Author: antoine de saint exupéry
+Barcode: 3
+Price: 7.0
+Stock Left: 8
+****************
+Subtotal: 54.98
+Discount recieved: 0.0%
+Order Total: 54.98
+Payment Method: cash
+Cash given: 100.0
+Change Owed: 45.02
+****************
+Cashier Number: 2222
+Cashier Name: Alex
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 393.38
+Email: eherrin6@uncc.edu
+****************

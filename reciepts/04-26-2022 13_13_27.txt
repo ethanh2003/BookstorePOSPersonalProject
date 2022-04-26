@@ -1,0 +1,28 @@
+****************
+04-26-2022 13_13_27
+***************
+Title: to kill a mockingbird
+Author: harper lee
+Barcode: 1
+Price: 12.99
+Stock Left: 103
+***************
+Title: the little prince
+Author: antoine de saint exupéry
+Barcode: 2
+Price: 7.0
+Stock Left: 7
+****************
+Subtotal: 7.0
+Discount recieved: 0.0%
+Order Total: 7.0
+Payment Method: card
+****************
+Cashier Number: 2222
+Cashier Name: Alex
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 426.36
+Email: eherrin6@uncc.edu
+****************

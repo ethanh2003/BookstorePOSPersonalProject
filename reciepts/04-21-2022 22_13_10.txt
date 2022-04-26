@@ -1,0 +1,22 @@
+****************
+04-21-2022 22_13_10
+***************
+Title: 1984
+Author: george orwell
+Barcode: 1
+Price: 15.99
+Stock Left: 2
+****************
+Subtotal: 15.99
+Discount recieved: 0.0%
+Order Total: 15.99
+Payment Method: card
+****************
+Cashier Number: 1111
+Cashier Name: Ethan
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 338.4
+Email: eherrin6@uncc.edu
+****************

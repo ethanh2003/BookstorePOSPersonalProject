@@ -1,0 +1,33 @@
+***************************
+Total Sales: 0.0
+Credit/Debit Card Sales: 0.0
+Cash Sales: 0.0
+Paid In Total: 0.0
+Paid Out Total: 0.0
+****************************
+Amount Expected in Drawer: 100.0
+Starting Balance: 100.0
+Drop Amount: 0.0
+****************************
+Paid in's
+****************************
+Paid Out's
+********************************
+Sales Per User
+User Name:                 Total Sales: 
+Sarah              0.0
+Jamie              0.0
+Ethan              0.0
+Alex              0.0
+Jade              0.0
+Carter              0.0
+MANAGERKEY              0.0
+********************************
+New Members: 0
+********************************
+Manager Overrides
+Sarah approved Initalizing Till for Alex
+Sarah approved run EOD for Alex
+********************************
+Todays purcahses
+Total was not reset. Current Drawer Total is: 100.0

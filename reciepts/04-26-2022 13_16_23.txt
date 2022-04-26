@@ -1,0 +1,22 @@
+****************
+04-26-2022 13_16_23
+***************
+Title: brave new world
+Author: aldous huxley
+Barcode: 3
+Price: 19.0
+Stock Left: 13
+****************
+Subtotal: 19.0
+Discount recieved: 18.0%
+Order Total: 15.2
+Payment Method: card
+****************
+Cashier Number: 2222
+Cashier Name: Alex
+****************
+Member ID: 801223095
+Member Name: Test2
+Total Spent: 220.39
+Email: eherrin7@uncc.edu
+****************

@@ -1,0 +1,24 @@
+****************
+04-26-2022 13_13_12
+***************
+Title: to kill a mockingbird
+Author: harper lee
+Barcode: 1
+Price: 12.99
+Stock Left: 103
+****************
+Subtotal: 12.99
+Discount recieved: 0.0%
+Order Total: 12.99
+Payment Method: cash
+Cash given: 100.0
+Change Owed: 87.01
+****************
+Cashier Number: 2222
+Cashier Name: Alex
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 419.36
+Email: eherrin6@uncc.edu
+****************

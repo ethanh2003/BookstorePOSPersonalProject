@@ -1,0 +1,31 @@
+***************************
+Total Sales: 19.99
+Credit/Debit Card Sales: 0.0
+Cash Sales: 19.99
+Paid In Total: 0.0
+Paid Out Total: 0.0
+****************************
+Amount Expected in Drawer: 119.99
+Starting Balance: 100.0
+Drop Amount: 19.99
+****************************
+Paid in's
+****************************
+Paid Out's
+********************************
+Sales Per User
+User Name:                 Total Sales: 
+Sarah              0.0
+Jamie              0.0
+Ethan              0.0
+Alex              0.0
+Jade              0.0
+Carter              0.0
+MANAGERKEY              0.0
+********************************
+New Members: 
+********************************
+Manager Overrides
+********************************
+Todays purcahses
+Total was not reset. Current Drawer Total is: 119.99

@@ -1,0 +1,8 @@
+userKey,isManager,name,payRate,usesMagCard,MagCard
+3214,true,Sarah,16.0,true,;:<>9772231704?
+2123,true,Jamie,12.0,true,:;<>9772231704
+1111,true,Ethan,20.0,false,0
+2222,false,Alex,10.0,false,0
+5324,false,Jade,10.0,false,0
+4241,false,Carter,11.0,false,0
+977223,true,MANAGERKEY,0.0,true,977223
