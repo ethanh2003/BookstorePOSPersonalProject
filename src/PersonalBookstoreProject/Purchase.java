@@ -26,6 +26,7 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
     private ArrayList<Customers> customerData = new ArrayList<Customers>();
     private ArrayList<Employee> employees = cashDrawer.importEmployeeData();
     private ArrayList<String> reciept = new ArrayList<>();
+    private ArrayList<Products> dailyPurchaseLog = new ArrayList<>();
     
 
     public Purchase() {
@@ -133,6 +134,7 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
                         + "\nBarcode: " + inventory.get(i).getBarcode() + "\nPrice: " + inventory.get(i).getPrice() + "\nStock Left: " + inventory.get(i).getStock());
                int num=inventory.get(i).getNumberPurchased()+1;
                 inventory.get(i).setNumberPurchased(num); 
+                dailyPurchaseLog.add(inventory.get(i));
 
                 if (inventory.get(i).getStock() == 0) {
                     System.out.println("Last of item stock has been purchased. " + inventory.get(i).getName() + " has been removed from inventory");
@@ -581,6 +583,25 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
         }
     }
     
+    public ArrayList<String> condensePurchaseLog(){
+        ArrayList<String> purchases = new ArrayList<>();
+        ArrayList<String> duplicateRemover=new ArrayList<>();
+        int count = 0;
+       for(Products p: dailyPurchaseLog){
+           for(int i =0;i<dailyPurchaseLog.size();i++){
+               if(p.getBarcode()==dailyPurchaseLog.get(i).getBarcode()){
+                  count++;
+           }
+       }
+           purchases.add(p.getName()+" was purcahsed "+count+" times today");
+           count=0;
+    }for(String s:purchases){
+        if(!duplicateRemover.contains(s)){
+            duplicateRemover.add(s);
+        }
+    }
+       return duplicateRemover;
+    }
 
 
 

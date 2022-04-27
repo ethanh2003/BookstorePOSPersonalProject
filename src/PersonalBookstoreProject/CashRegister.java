@@ -32,9 +32,11 @@ public class CashRegister implements CashDrawer {
     private double paidInTotal = 0;
     private double paidOutTotal = 0;
     private double dropAmount = 0;
+    private int newMembers=0;
     private ArrayList<String> paidIn = new ArrayList<>();
     private ArrayList<String> paidOut = new ArrayList<>();
     private ArrayList<String> managerApproval = new ArrayList<>();
+    private ArrayList<String> purchases;
 
     /**
      * Generates inital employee numbers
@@ -91,7 +93,7 @@ public class CashRegister implements CashDrawer {
      * @param restart allows you to choose if you want to reset till totals
      */
     @Override
-    public void endOfDayTotal(int restart) {
+    public void endOfDayTotal(int restart,int userKey) {
         FileOutputStream fs = null;
         try {
             finalTotal = cashTotal + paidInTotal - paidOutTotal;
@@ -100,11 +102,20 @@ public class CashRegister implements CashDrawer {
             dropAmount = amountInDrawer - startingTotal;
 
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH_mm_ss");
+            DateTimeFormatter date = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+            DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+
             LocalDateTime now = LocalDateTime.now();;
             String path = "./EODReports/CashDrawerTotal_" + dtf.format(now) + ".txt";
             fs = new FileOutputStream(path);
             PrintWriter outFS = new PrintWriter(fs);
-
+            outFS.println("\t\tEND OF DAY REPORT\t\t");
+            for(Employee e:employees){
+                if(e.getUserKey()==userKey){
+                                outFS.println("Ran by: "+e.getName());
+                                outFS.println("Date: "+date.format(now)+" Time: "+time.format(now));
+                }
+            }
             outFS.println("***************************");
             outFS.println("Total Sales: " + finalSalesTotal);
             outFS.println("Credit/Debit Card Sales: " + chargeTotal);
@@ -127,13 +138,19 @@ public class CashRegister implements CashDrawer {
             }
             outFS.println("********************************");
             outFS.println("Sales Per User");
-            outFS.println("User Name:                 Total Sales: ");
+            outFS.println("User Name:\tTotal Sales: ");
             for (Employee e : employees) {
-                outFS.println(e.getName() + "              " + e.getTotalSales());
+                if(e.getUserKey()!=977223){
+                outFS.println(e.getName() + "\t\t" + e.getTotalSales());
+                }//key 977223 is blocked because it should not be used for sign in and sales, only for keycard
             }
             outFS.println("********************************");
-            outFS.println("New Members: ");
-            System.out.println("NOT WORKING PROPERLY");
+            outFS.println("New Members: "+newMembers);
+            
+            for(Employee e:employees){
+                if(e.getUserKey()!=977223){
+                outFS.println(e.getName()+"\t\t"+e.getNumberMembersRegistered());
+            }}//key 977223 is blocked because it should not be used for sign in and sales, only for keycard
             outFS.println("********************************");
             outFS.println("Manager Overrides");
             for(String s:managerApproval){
@@ -141,19 +158,11 @@ public class CashRegister implements CashDrawer {
             }
             outFS.println("********************************");
             outFS.println("Todays purcahses");
-            for(Products p:inventory){
-            outFS.println("Title: " + p.getName() + "\nAuthor: " + p.getAuthor()
-                    + "\nBarcode: " + p.getBarcode() + "\nPrice: " + p.getPrice() + "\nStock: " + p.getStock());
-            if (p instanceof Book) {
-                outFS.println("Product Type: Book");
-            } else if (p instanceof CD) {
-                outFS.println("Product Type: CD");
-            } else if (p instanceof DVD) {
-                outFS.println("Product Type: DVD");
+            for(String s:purchases){
+            outFS.println(s);
             }
-            outFS.println("Number Purchased Today: "+p.getNumberPurchased());
-            System.out.println("***************************");
-        }
+            outFS.println("***************************");
+
             
             if (restart == 1) {
                 runningTotal = startingTotal;
@@ -167,12 +176,16 @@ public class CashRegister implements CashDrawer {
                 for (int i = 0; i < paidIn.size(); i++) {
                     paidIn.remove(i);
                 }
+                
                 for (int i = 0; i < paidOut.size(); i++) {
                     paidOut.remove(i);
                 }
                 for (int i = 0; i < managerApproval.size(); i++) {
                     managerApproval.remove(i);
                 }
+                for (int i = 0; i < purchases.size(); i++) {
+                    purchases.remove(i);
+                }                
                 outFS.println("Totals have been reset. Drawer Total is: " + startingTotal);
                 outFS.close();
             } else {
@@ -268,16 +281,17 @@ public class CashRegister implements CashDrawer {
 
     /**
      * Validates key to see if it has manager access
-     *
+     *key 977223 is blocked for validation because it is only useable for keycard
      * @param mngrKey key to be checked
      * @return true if it is a manager key, false otherwise
      */
     public boolean validateManagerKey(int mngrKey) {
         for (int i = 0; i < employees.size(); i++) {
             if (mngrKey == employees.get(i).getUserKey()) {
+                if(mngrKey!=977223){
                 if (employees.get(i).isManager() == true) {
                     return true;
-                }
+                }}
             }
         }
         return false;
@@ -285,15 +299,17 @@ public class CashRegister implements CashDrawer {
 
     /**
      * confirms key belongs to cashier
-     *
+     *key 977223 is blocked for validation because it is only useable for keycard
      * @param cashKey key to be checked
      * @return true if belongs to cashier. false otherwise
      */
     public boolean validateCashierKey(int cashKey) {
         for (int i = 0; i < employees.size(); i++) {
             if (cashKey == employees.get(i).getUserKey()) {
+                if(cashKey!=977223){
                 if (employees.get(i).isManager() == false) {
                     return true;
+                }
                 }
             }
         }
@@ -302,14 +318,16 @@ public class CashRegister implements CashDrawer {
 
     /**
      * Checks key agaisnt manager and cashier keys
-     *
+     *key 977223 is blocked for validation because it is only useable for keycard
      * @param key key to be checked
      * @return true if found, false otherwise
      */
     public boolean validateAllKeys(int key) {
         for (int i = 0; i < employees.size(); i++) {
+            if(key!=977223){
             if (key == employees.get(i).getUserKey()) {
                 return true;
+            }
             }
         }
         return false;
@@ -320,9 +338,16 @@ public class CashRegister implements CashDrawer {
      *
      * @param amount amount of total order
      */
-    public void cashSale(double amount) {
+    public void cashSale(double amount,int userKey) {
         cashTotal = amount + cashTotal;
         runningTotal = amount + runningTotal;
+        for(Employee e:employees){
+            if(userKey==e.getUserKey()){
+                double userSales=e.getTotalSales()+amount;
+                e.setTotalSales(userSales);
+            }
+        }
+        
     }
 
     /**
@@ -330,9 +355,15 @@ public class CashRegister implements CashDrawer {
      *
      * @param amount amount of credit card sale
      */
-    public void chargeSale(double amount) {
+    public void chargeSale(double amount,int userKey) {
         chargeTotal = amount + chargeTotal;
         //runningTotal = amount + runningTotal;
+                for(Employee e:employees){
+            if(userKey==e.getUserKey()){
+                double userSales=e.getTotalSales()+amount;
+                e.setTotalSales(userSales);
+            }
+        }
     }
 
     public void saveEmployees() {
@@ -431,6 +462,18 @@ public class CashRegister implements CashDrawer {
     
     public ArrayList<Employee> importEmployeeData(){
         return employees;
+    }
+    public void importPurchaseLog(ArrayList<String> s){
+        purchases = s;
+    }
+    public void countNewMembers(int userKey){
+        newMembers++;
+        for(Employee e:employees){
+            if(e.getUserKey()==userKey){
+                int num=e.getNumberMembersRegistered()+1;
+                e.setNumberMembersRegistered(num);
+            }
+        }
     }
 
         /**

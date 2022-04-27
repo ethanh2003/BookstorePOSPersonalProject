@@ -243,7 +243,7 @@ public class POS {
                                 if (changeOwed >= 0) {
                                     //calcualtes change owed
                                     System.out.println("You owe them " + changeOwed);
-                                    cashDrawer.cashSale(orderTotal);
+                                    cashDrawer.cashSale(orderTotal,userKey);
                                     validCash = true;
                                 } else {
                                     System.out.println("Amount does not cover total bill. \nPlease enter valid amount");
@@ -251,7 +251,7 @@ public class POS {
                             }
                         } else if (paymentType == 2) {
                             //adds sales to charge total
-                            cashDrawer.chargeSale(orderTotal);
+                            cashDrawer.chargeSale(orderTotal,userKey);
                             method = "card";
                         }
                         // purchase.reciept(subTotal,orderTotal,customerID,userKey,discount);
@@ -411,6 +411,8 @@ public class POS {
                         break;
 
                     case 5:
+                        cashDrawer.countNewMembers(userKey);
+                        
                         System.out.println("Enter Name");
                         String name = sc.next();
                         System.out.println("Enter Birthday");
@@ -547,11 +549,12 @@ public class POS {
                         //compares price of two products
                         break;
                     case 12:
+                        cashDrawer.importPurchaseLog(purchase.condensePurchaseLog());
                         if (cashDrawer.validateManagerKey(userKey)) {
                             //checks access level
                             System.out.println("Enter 1 to reset Till when report is ran");
                             int reset = sc.nextInt();
-                            cashDrawer.endOfDayTotal(reset);
+                            cashDrawer.endOfDayTotal(reset,userKey);
                             EODRan = true;
                         } else {
                             System.out.println("Manager Access is required for this function");
@@ -563,7 +566,7 @@ public class POS {
                                 if (cashDrawer.validateMagCardSolo(mag, "run EOD", userKey)) {
                                     System.out.println("Enter 1 to reset Till when report is ran");
                                     int reset = sc.nextInt();
-                                    cashDrawer.endOfDayTotal(reset);
+                                    cashDrawer.endOfDayTotal(reset,userKey);
                                     EODRan = true;
                                 } else {
                                     System.out.println("invalid mag card");

@@ -23,7 +23,7 @@ public interface CashDrawer {
      *
      * @param restart allows you to reset counts
      */
-    public void endOfDayTotal(int restart);
+    public void endOfDayTotal(int restart,int userKey);
 
     /**
      * Performs paid in procedure

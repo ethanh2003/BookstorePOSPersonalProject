@@ -5,12 +5,18 @@
         <group>
             <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/CD.java</file>
             <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/DVD.java</file>
-            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/CashRegister.java</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/EODReports/CashDrawerTotal_04-27-2022%2015_29_51.txt</file>
             <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/Purchase.java</file>
-            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/Employee.java</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/CashRegister.java</file>
             <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/Products.java</file>
             <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/Book.java</file>
             <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/POS.java</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/Employee.java</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/src/PersonalBookstoreProject/CashDrawer.java</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/EmployeeData.csv</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/EODReports/CashDrawerTotal_04-27-2022%2015_37_32.txt</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/EODReports/CashDrawerTotal_04-27-2022%2014_07_42.txt</file>
+            <file>file:/C:/Users/Ethan%20Herring/OneDrive/Documents/NetBeansProjects/BookstorePOSPersonalProject/EODReports/CashDrawerTotal_04-27-2022%2015_25_41.txt</file>
         </group>
     </open-files>
 </project-private>
