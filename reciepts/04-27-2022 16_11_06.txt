@@ -1,0 +1,24 @@
+****************
+04-27-2022 16_11_06
+***************
+Title: jurassic park
+Author: n/a 
+Barcode: 12
+Price: 7.99
+Stock Left: 6
+****************
+Subtotal: 7.99
+Discount recieved: 0.0%
+Order Total: 7.99
+Payment Method: cash
+Cash given: 100.0
+Change Owed: 92.01
+****************
+Cashier Number: 1111
+Cashier Name: Ethan
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 460.33
+Email: eherrin6@uncc.edu
+****************

@@ -1,0 +1,41 @@
+		END OF DAY REPORT		
+Ran by: Ethan
+Date: 04-27-2022 Time: 16:11:08
+***************************
+Total Sales: 7.99
+Credit/Debit Card Sales: 0.0
+Cash Sales: 7.99
+Paid In Total: 0.0
+Paid Out Total: 0.0
+****************************
+Amount Expected in Drawer: 130.99
+Starting Balance: 123.0
+Drop Amount: 7.99
+****************************
+Paid in's
+****************************
+Paid Out's
+********************************
+Sales Per User
+User Name:	Total Sales: 
+Sarah		0.0
+Jamie		0.0
+Ethan		7.99
+Alex		0.0
+Jade		0.0
+Carter		0.0
+********************************
+New Members: 0
+Sarah		0
+Jamie		0
+Ethan		0
+Alex		0
+Jade		0
+Carter		0
+********************************
+Manager Overrides
+********************************
+Todays purcahses
+jurassic park was purcahsed 1 times today
+***************************
+Total was not reset. Current Drawer Total is: 130.99
