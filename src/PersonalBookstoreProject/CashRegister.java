@@ -39,7 +39,7 @@ public class CashRegister implements CashDrawer {
     private ArrayList<String> purchases;
 
     /**
-     * Generates inital employee numbers
+     * Reads saved employee data
      */
     public CashRegister() {
         Scanner fileScanner;
@@ -91,6 +91,7 @@ public class CashRegister implements CashDrawer {
      * Runs end of day providing sales and drawer totals
      *
      * @param restart allows you to choose if you want to reset till totals
+     * @param userKey used to get name of user running report
      */
     @Override
     public void endOfDayTotal(int restart,int userKey) {
@@ -270,7 +271,10 @@ public class CashRegister implements CashDrawer {
             }
         }
     }
-
+/**
+ * Updates user access to manager
+ * @param key 
+ */
     public void changeToManager(int key) {
         for (int i = 0; i < employees.size(); i++) {
             if (key == employees.get(i).getUserKey()) {
@@ -337,6 +341,7 @@ public class CashRegister implements CashDrawer {
      * Adds cash sale to total and adds to till
      *
      * @param amount amount of total order
+     * @param userKey takes user ley to track user sales
      */
     public void cashSale(double amount,int userKey) {
         cashTotal = amount + cashTotal;
@@ -354,6 +359,7 @@ public class CashRegister implements CashDrawer {
      * Tracks credit card sales
      *
      * @param amount amount of credit card sale
+     * @param userKey takes user ley to track user sales
      */
     public void chargeSale(double amount,int userKey) {
         chargeTotal = amount + chargeTotal;
@@ -365,7 +371,9 @@ public class CashRegister implements CashDrawer {
             }
         }
     }
-
+/**
+ * Writes and saves employee data to file
+ */
     public void saveEmployees() {
         FileOutputStream employeeFS = null;
         try {
@@ -388,7 +396,10 @@ public class CashRegister implements CashDrawer {
             }
         }
     }
-
+/**
+ * returns employee data
+ * @param key key of user to return data
+ */
     public void getEmployeeData(int key) {
         for (int i = 0; i < employees.size(); i++) {
             if (key == employees.get(i).getUserKey()) {
@@ -396,7 +407,11 @@ public class CashRegister implements CashDrawer {
             }
         }
     }
-
+/**
+ * Assigns magCard to user
+ * @param userKey locates user to assign card to
+ * @param mag magCard number
+ */
     public void assignMag(int userKey, String mag) {
 
         for (Employee e : employees) {
@@ -406,7 +421,11 @@ public class CashRegister implements CashDrawer {
             }
         }
     }
-
+/**
+ * Validates of user uses magCard
+ * @param userKey used to locate if user uses mag
+ * @return true if uses magCard
+ */
     public boolean usesMag(int userKey) {
         for (Employee e : employees) {
             if (e.getUserKey() == userKey) {
@@ -417,7 +436,12 @@ public class CashRegister implements CashDrawer {
         }
         return false;
     }
-
+/**
+ * validates if magCard matches user key
+ * @param userKey
+ * @param mag
+ * @return 
+ */
     public boolean validateMagCard(int userKey, String mag) {
 
         if (mag.contains("?") || mag.contains("|")) {

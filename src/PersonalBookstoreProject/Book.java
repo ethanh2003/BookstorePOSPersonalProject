@@ -30,10 +30,6 @@ public class Book extends Products {
         super(name, author, price, stock, Products.productID);
         super.incrimentBarcode();
     }
-        public void setNumberPurchased(int i){
-        numPurcahsed=i;
-    }public int getNumberPurchased(){
-        return numPurcahsed;
-    }
+    
 
 }
