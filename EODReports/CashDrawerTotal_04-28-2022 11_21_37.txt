@@ -1,0 +1,46 @@
+		END OF DAY REPORT		
+Ran by: Alex
+Date: 04-28-2022 Time: 11:21:37
+***************************
+Total Sales: 26.0
+Credit/Debit Card Sales: 0.0
+Cash Sales: 26.0
+Paid In Total: 0.0
+Paid Out Total: 0.0
+****************************
+Amount Expected in Drawer: 126.0
+Starting Balance: 100.0
+Drop Amount: 26.0
+****************************
+Paid in's
+****************************
+Paid Out's
+********************************
+Sales Per User
+User Name:	Total Sales: 
+Sarah		0.0
+Jamie		0.0
+Ethan		0.0
+Alex		26.0
+Jade		0.0
+Carter		0.0
+June		0.0
+********************************
+New Members: 0
+Sarah		0
+Jamie		0
+Ethan		0
+Alex		0
+Jade		0
+Carter		0
+June		0
+********************************
+Manager Overrides
+MANAGERKEY approved Initalizing Till for Alex
+MANAGERKEY approved run EOD for Alex
+********************************
+Todays purcahses
+the little prince was purcahsed 1 times today
+brave new world was purcahsed 1 times today
+***************************
+Totals have been reset. Drawer Total is: 100.0

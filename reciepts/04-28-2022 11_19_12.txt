@@ -1,0 +1,34 @@
+****************
+04-28-2022 11_19_12
+***************
+Title: to kill a mockingbird
+Author: harper lee
+Barcode: 1
+Price: 12.99
+Stock Left: 98
+***************
+Title: the little prince
+Author: antoine de saint exupéry
+Barcode: 2
+Price: 7.0
+Stock Left: 3
+***************
+Title: hitchhiker's guide to the galaxy
+Author: douglas adams
+Barcode: 5
+Price: 9.99
+Stock Left: 4
+****************
+Subtotal: 29.98
+Discount recieved: 0.0%
+Order Total: 29.98
+Payment Method: card
+****************
+Cashier Number: 1111
+Cashier Name: Ethan
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 510.3
+Email: eherrin6@uncc.edu
+****************

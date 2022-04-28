@@ -35,6 +35,7 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
     public Purchase() {
         try {
             //productInventory.csv
+
             Scanner fileScanner = new Scanner(new File("productInventory.csv"));
             while (fileScanner.hasNext()) {
                 String line = fileScanner.nextLine();
@@ -62,7 +63,6 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
                 }
             }
             try {
-                //3 is premium index
                 fileScanner = new Scanner(new File("customerData.csv"));
                 fileScanner.nextLine();
                 while (fileScanner.hasNext()) {
@@ -91,10 +91,37 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            FileOutputStream inventoryFS = null;
+            try {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH_mm_ss");
+                LocalDateTime now = LocalDateTime.now();;
 
-            /**
-             * Creates test data
-             */
+                String newPath = "./PastInventoryFiles/Inventory as of " + dtf.format(now) + ".csv";
+
+                String type = null;
+                inventoryFS = new FileOutputStream(newPath);
+                PrintWriter inventoryOut = new PrintWriter(inventoryFS);
+                inventoryOut.println("productID,type,title,author/artist,numInStock,price");
+                for (Products s : inventory) {
+                    if (s instanceof Book) {
+                        type = "book";
+                    } else if (s instanceof DVD) {
+                        type = "dvd";
+                    } else if (s instanceof CD) {
+                        type = "cd";
+                    }
+                    inventoryOut.println(s.getBarcode() + "," + type + "," + s.getName() + "," + s.getAuthor() + "," + s.getStock() + "," + s.getPrice());
+                }
+                try {
+                    inventoryFS.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                inventoryOut.close();
+                /**
+                 * Creates test data
+                 */
 //                inventory.add(new DVD("Indiana Jones", "No idea", 12.99, 3));
 //                inventory.add(new Book("Lucid", "No Idea", 10.99, 5));
 //                inventory.add(new CD("Forever 21", "Taylor Swift", 15.99, 3));
@@ -108,10 +135,13 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
 //                customerData.add(new PremiumMember("Test17", "september 6th 2000", "eherrin@uncc.edu",
 //                        455.45, 801223097, true, 3456));
 //        
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**

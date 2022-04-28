@@ -1,0 +1,30 @@
+****************
+04-28-2022 11_21_31
+***************
+Title: the little prince
+Author: antoine de saint exupéry
+Barcode: 2
+Price: 7.0
+Stock Left: 2
+***************
+Title: brave new world
+Author: aldous huxley
+Barcode: 3
+Price: 19.0
+Stock Left: 11
+****************
+Subtotal: 26.0
+Discount recieved: 0.0%
+Order Total: 26.0
+Payment Method: cash
+Cash given: 100.0
+Change Owed: 74.0
+****************
+Cashier Number: 2222
+Cashier Name: Alex
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 536.3
+Email: eherrin6@uncc.edu
+****************
