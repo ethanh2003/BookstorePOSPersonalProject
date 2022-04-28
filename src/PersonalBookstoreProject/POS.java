@@ -30,7 +30,7 @@ public class POS {
         System.out.println("*************************");
         Purchase purchase = new Purchase();
         CashRegister cashDrawer = new CashRegister();
-                
+                purchase.createPastInventory();
 
         boolean exit = false;
         double price = 0;

@@ -92,54 +92,7 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
                 Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            FileOutputStream inventoryFS = null;
-            try {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH_mm_ss");
-                LocalDateTime now = LocalDateTime.now();;
-
-                String newPath = "./PastInventoryFiles/Inventory as of " + dtf.format(now) + ".csv";
-
-                String type = null;
-                inventoryFS = new FileOutputStream(newPath);
-                PrintWriter inventoryOut = new PrintWriter(inventoryFS);
-                inventoryOut.println("productID,type,title,author/artist,numInStock,price");
-                for (Products s : inventory) {
-                    if (s instanceof Book) {
-                        type = "book";
-                    } else if (s instanceof DVD) {
-                        type = "dvd";
-                    } else if (s instanceof CD) {
-                        type = "cd";
-                    }
-                    inventoryOut.println(s.getBarcode() + "," + type + "," + s.getName() + "," + s.getAuthor() + "," + s.getStock() + "," + s.getPrice());
-                }
-                try {
-                    inventoryFS.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                inventoryOut.close();
-                /**
-                 * Creates test data
-                 */
-//                inventory.add(new DVD("Indiana Jones", "No idea", 12.99, 3));
-//                inventory.add(new Book("Lucid", "No Idea", 10.99, 5));
-//                inventory.add(new CD("Forever 21", "Taylor Swift", 15.99, 3));
-//
-//                customerData.add(new Member("Test1", "september 6th 2003", "eherrin6@uncc.edu",
-//                        230.45, 801223094));
-//                customerData.add(new PremiumMember("Test2", "December 6th 2003", "eherrin7@uncc.edu",
-//                        90.45, 801223095, true, 2432));
-//                customerData.add(new Member("Test3", "October 6th 2003", "eherrin3@uncc.edu",
-//                        150.45, 801223096));
-//                customerData.add(new PremiumMember("Test17", "september 6th 2000", "eherrin@uncc.edu",
-//                        455.45, 801223097, true, 3456));
-//        
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } catch (FileNotFoundException ex) {
+    }   catch (FileNotFoundException ex) {
             Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -656,6 +609,40 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             }
         }
         return duplicateRemover;
+    }
+    public void createPastInventory(){
+
+        FileOutputStream oldInventoryFS = null;
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH_mm_ss");
+            LocalDateTime now = LocalDateTime.now();
+            String newPath = "./PastInventoryFiles/Inventory as of " + dtf.format(now) + ".csv";
+            String type = null;
+            oldInventoryFS = new FileOutputStream(newPath);
+            PrintWriter oldInventoryOut = new PrintWriter(oldInventoryFS);
+            oldInventoryOut.println("productID,type,title,author/artist,numInStock,price");
+            for (Products s : inventory) {
+                if (s instanceof Book) {
+                    type = "book";
+                } else if (s instanceof DVD) {
+                    type = "dvd";
+                } else if (s instanceof CD) {
+                    type = "cd";
+                }
+                oldInventoryOut.println(s.getBarcode() + "," + type + "," + s.getName() + "," + s.getAuthor() + "," + s.getStock() + "," + s.getPrice());
+            }
+            oldInventoryOut.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+            oldInventoryFS.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

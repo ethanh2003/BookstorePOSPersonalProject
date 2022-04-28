@@ -1,0 +1,40 @@
+****************
+04-28-2022 15_08_27
+***************
+Title: to kill a mockingbird
+Author: harper lee
+Barcode: 1
+Price: 12.99
+Stock Left: 97
+***************
+Title: the little prince
+Author: antoine de saint exupéry
+Barcode: 2
+Price: 7.0
+Stock Left: 1
+***************
+Title: brave new world
+Author: aldous huxley
+Barcode: 3
+Price: 19.0
+Stock Left: 10
+***************
+Title: charlotte's web
+Author: e.b. white
+Barcode: 4
+Price: 8.99
+Stock Left: 9
+****************
+Subtotal: 47.98
+Discount recieved: 0.0%
+Order Total: 47.98
+Payment Method: card
+****************
+Cashier Number: 1111
+Cashier Name: Ethan
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 584.28
+Email: eherrin6@uncc.edu
+****************
