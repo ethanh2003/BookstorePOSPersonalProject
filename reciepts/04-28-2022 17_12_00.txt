@@ -1,0 +1,27 @@
+****************
+04-28-2022 17_12_00
+***************
+Title: hitchhiker's guide to the galaxy
+Author: douglas adams
+Barcode: 5
+Price: 9.99
+Stock Left: 3
+***************
+Title: catch-22
+Author: joseph heller
+Barcode: 6
+Price: 11.99
+Stock Left: 19
+****************
+Subtotal: 11.99
+Order Total: 10.1915
+Payment Method: card
+****************
+Cashier Number: 1111
+Cashier Name: Ethan
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 626.25
+Email: eherrin6@uncc.edu
+****************

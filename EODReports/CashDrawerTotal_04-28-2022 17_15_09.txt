@@ -1,0 +1,49 @@
+		END OF DAY REPORT		
+Ran by: Ethan
+Date: 04-28-2022 Time: 17:15:09
+***************************
+Total Sales: 4.314
+Credit/Debit Card Sales: 4.314
+Cash Sales: 0.0
+Paid In Total: 0.0
+Paid Out Total: 0.0
+Total Comps: 27
+****************************
+Amount Expected in Drawer: 100.0
+Starting Balance: 100.0
+Drop Amount: 0.0
+****************************
+Paid in's
+****************************
+Paid Out's
+********************************
+Sales Per User
+User Name:	Total Sales: 
+Sarah		0.0
+Jamie		0.0
+Ethan		4.314
+Alex		0.0
+Jade		0.0
+Carter		0.0
+June		0.0
+********************************
+New Members: 0
+Sarah		0
+Jamie		0
+Ethan		0
+Alex		0
+Jade		0
+Carter		0
+June		0
+********************************
+Manager Comps
+EthanApplied 100% Discount	 Reason: Inventory_Adjust
+EthanApplied Employee Discount	 Employee Name: Sam
+********************************
+Manager Overrides
+********************************
+Todays purcahses
+charlotte's web was purcahsed 3 times today
+cuz I love you was purcahsed 1 times today
+***************************
+Totals have been reset. Drawer Total is: 100.0

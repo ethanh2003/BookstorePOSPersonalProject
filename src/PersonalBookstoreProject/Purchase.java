@@ -91,8 +91,8 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-    }   catch (FileNotFoundException ex) {
+
+        } catch (FileNotFoundException ex) {
             Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -422,7 +422,7 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
      * @param paymentMethod cash or card
      * @param totalGiven cash given to cashier
      */
-    public void reciept(double subTotal, double total, int memberID, int cashierNum, double discount, String paymentMethod, double totalGiven) {
+    public void reciept(double subTotal, double total, int memberID, int cashierNum, double discount, String paymentMethod, double totalGiven,double customDiscount) {
         FileOutputStream recieptWriter = null;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH_mm_ss");
         DateTimeFormatter date = DateTimeFormatter.ofPattern("MM-dd-yyyy HH_mm_ss");
@@ -464,7 +464,8 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             }
             System.out.println("****************");
             System.out.println("Subtotal: " + (Math.round(subTotal * 100.0) / 100.0));
-            System.out.println("Discount recieved: " + discount * 90 + "%");
+            System.out.println("Rewards Discount recieved: " + discount * 90 + "%");
+            System.out.println("Custom Discount Recieved: "+customDiscount);
             System.out.println("Order Total: " + total);
             System.out.println("Payment Method: " + paymentMethod);
             if (paymentMethod.equals("cash")) {
@@ -493,7 +494,8 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             }
             recieptOut.println("****************");
             recieptOut.println("Subtotal: " + (Math.round(subTotal * 100.0) / 100.0));
-            recieptOut.println("Discount recieved: " + discount * 90 + "%");
+            recieptOut.println("Rewards Discount recieved: " + discount * 90 + "%");
+            recieptOut.println("Custom Discount Recieved: "+customDiscount);
             recieptOut.println("Order Total: " + total);
             recieptOut.println("Payment Method: " + paymentMethod);
             if (paymentMethod.equals("cash")) {
@@ -610,7 +612,8 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
         }
         return duplicateRemover;
     }
-    public void createPastInventory(){
+
+    public void createPastInventory() {
 
         FileOutputStream oldInventoryFS = null;
         try {
@@ -638,11 +641,10 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-            oldInventoryFS.close();
+                oldInventoryFS.close();
             } catch (IOException ex) {
                 Logger.getLogger(Purchase.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-
 }

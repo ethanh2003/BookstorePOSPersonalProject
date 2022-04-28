@@ -1,0 +1,29 @@
+****************
+04-28-2022 17_15_07
+***************
+Title: charlotte's web
+Author: e.b. white
+Barcode: 3
+Price: 8.99
+Stock Left: 7
+***************
+Title: charlotte's web
+Author: e.b. white
+Barcode: 3
+Price: 8.99
+Stock Left: 6
+****************
+Subtotal: 8.99
+Rewards Discount recieved: 18.0%
+Custom Discount Recieved: 2.8760000000000003
+Order Total: 4.314
+Payment Method: card
+****************
+Cashier Number: 1111
+Cashier Name: Ethan
+****************
+Member ID: 801223095
+Member Name: Test2
+Total Spent: 275.37
+Email: eherrin7@uncc.edu
+****************

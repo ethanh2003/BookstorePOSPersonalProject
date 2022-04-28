@@ -1,0 +1,35 @@
+****************
+04-28-2022 17_14_40
+***************
+Title: charlotte's web
+Author: e.b. white
+Barcode: 3
+Price: 8.99
+Stock Left: 8
+***************
+Title: charlotte's web
+Author: e.b. white
+Barcode: 3
+Price: 8.99
+Stock Left: 7
+***************
+Title: cuz I love you
+Author: lizzo
+Barcode: 8
+Price: 7.99
+Stock Left: 7
+****************
+Subtotal: 25.97
+Rewards Discount recieved: 0.0%
+Custom Discount Recieved: 25.97
+Order Total: 0.0
+Payment Method: card
+****************
+Cashier Number: 1111
+Cashier Name: Ethan
+****************
+Member ID: 801223094
+Member Name: Test1
+Total Spent: 652.22
+Email: eherrin6@uncc.edu
+****************

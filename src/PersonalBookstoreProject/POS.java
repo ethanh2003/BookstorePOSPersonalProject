@@ -30,7 +30,7 @@ public class POS {
         System.out.println("*************************");
         Purchase purchase = new Purchase();
         CashRegister cashDrawer = new CashRegister();
-                purchase.createPastInventory();
+        purchase.createPastInventory();
 
         boolean exit = false;
         double price = 0;
@@ -93,7 +93,7 @@ public class POS {
                     } else {
                         System.out.println("Manager Required to Initalize Till");
                         System.out.println("Enter 1 to have manager swipe and 2 to log in again");
-                        
+
                         int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function//Allows user to swipe manager card to give temporary access to manager function//Allows user to swipe manager card to give temporary access to manager function
                         if (managerSwipe == 2) {
                             System.out.println("Please enter Login Key:");
@@ -219,6 +219,60 @@ public class POS {
                         orderTotal = Math.round(orderTotal * 100.0) / 100.0;
                         System.out.println("your total is " + orderTotal);
                         boolean validNum = false;
+                        double newTotal = 0;
+                        System.out.println("Enter 1 to apply manual discount");
+                        int apply = sc.nextInt();
+                        if (apply == 1) {
+                            boolean manager = false;
+                            if (cashDrawer.validateManagerKey(userKey)) {
+                                manager = true;
+                            } else {
+                                System.out.println("Manager is required for this function");
+                                System.out.println("Enter 1 for manager swipe and 2 to abort");
+                                int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
+                                if (managerSwipe == 1) {
+                                    System.out.println("Please swipe User Mag Card");
+                                    String mag = sc.next();
+                                    if (cashDrawer.validateMagCardSolo(mag, "Apply Discount", userKey)) {
+                                        manager = true;
+                                    }
+                                }
+                            }
+                            if (manager) {
+                                
+                                System.out.println("\t1. Employee Discount");
+                                System.out.println("\t2. 20% Discount");
+                                System.out.println("\t3. 10% Discount");
+                                System.out.println("\t4. Manager Discount");
+                                System.out.println("\t5. 100% Discount");
+                                System.out.println("\t6. Custom Dollar");
+                                System.out.println("\t7. Custom Percent");
+                                int choice = sc.nextInt();
+                                if (choice == 1 || choice == 4) {
+                                    System.out.println("Enter Employee Name: ");
+                                    String employeeName = sc.next();
+                                    newTotal=cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, employeeName);
+                                } else if (choice == 2 || choice == 3 || choice == 5) {
+                                    System.out.println("Enter Reason");
+                                    String discountReason = sc.next();
+                                    newTotal=cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, discountReason);
+                                } else if (choice == 6) {
+                                    System.out.println("Enter Reason");
+                                    String discountReason = sc.next();
+                                    System.out.println("Enter Dollar Amount");
+                                    Double dollarDiscount=sc.nextDouble();
+                                    newTotal=cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, dollarDiscount, 0, discountReason);
+
+                                } else if (choice == 7) {
+                                    System.out.println("Enter Reason");
+                                    String discountReason = sc.next();
+                                    System.out.println("Enter Percent");
+                                    Double percentDiscount = sc.nextDouble();
+                                    newTotal=cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, 0, percentDiscount, discountReason);
+
+                                }
+                            }
+                        }
                         while (!validNum) {
                             //loops until user chooses valid number
                             System.out.println("Select 1 for cash and 2 for card");
@@ -239,12 +293,12 @@ public class POS {
                                 //loops until cash paid is greater than or equal to toal
                                 System.out.println("Enter Cash given:");
                                 cashGiven = sc.nextDouble();
-                                double changeOwed = cashGiven - orderTotal;
+                                double changeOwed = cashGiven - newTotal;
                                 changeOwed = Math.round(changeOwed * 100.0) / 100.0;
                                 if (changeOwed >= 0) {
                                     //calcualtes change owed
                                     System.out.println("You owe them " + changeOwed);
-                                    cashDrawer.cashSale(orderTotal,userKey);
+                                    cashDrawer.cashSale(newTotal, userKey);
                                     validCash = true;
                                 } else {
                                     System.out.println("Amount does not cover total bill. \nPlease enter valid amount");
@@ -252,10 +306,11 @@ public class POS {
                             }
                         } else if (paymentType == 2) {
                             //adds sales to charge total
-                            cashDrawer.chargeSale(orderTotal,userKey);
+                            cashDrawer.chargeSale(newTotal, userKey);
                             method = "card";
                         }
-                        purchase.reciept(subTotal, orderTotal, customerID, userKey, discount, method, cashGiven);
+                        double customDiscount=orderTotal-newTotal;
+                        purchase.reciept(subTotal, newTotal, customerID, userKey, discount, method, cashGiven,customDiscount);
                         //creates user reciept
                         break;
                     case 2:
@@ -413,7 +468,7 @@ public class POS {
 
                     case 5:
                         cashDrawer.countNewMembers(userKey);
-                        
+
                         System.out.println("Enter Name");
                         String name = sc.next();
                         System.out.println("Enter Birthday");
@@ -555,7 +610,7 @@ public class POS {
                             //checks access level
                             System.out.println("Enter 1 to reset Till when report is ran");
                             int reset = sc.nextInt();
-                            cashDrawer.endOfDayTotal(reset,userKey);
+                            cashDrawer.endOfDayTotal(reset, userKey);
                             EODRan = true;
                         } else {
                             System.out.println("Manager Access is required for this function");
@@ -567,7 +622,7 @@ public class POS {
                                 if (cashDrawer.validateMagCardSolo(mag, "run EOD", userKey)) {
                                     System.out.println("Enter 1 to reset Till when report is ran");
                                     int reset = sc.nextInt();
-                                    cashDrawer.endOfDayTotal(reset,userKey);
+                                    cashDrawer.endOfDayTotal(reset, userKey);
                                     EODRan = true;
                                 } else {
                                     System.out.println("invalid mag card");
@@ -891,7 +946,7 @@ public class POS {
                                 }
                             }
                         }
-                        
+
                         break;
                     //gets employee data
                     case 21:
@@ -931,7 +986,7 @@ public class POS {
                                     //Validates access level to exit program
                                     exit = true;
                                     purchase.saveData();
-                                    
+
                                     cashDrawer.saveEmployees();
                                 } else {
                                     System.out.println("Please Run End of Day Procedures before exiting");
@@ -950,8 +1005,8 @@ public class POS {
 
             } catch (InputMismatchException e) {
                 System.out.println("you have entered an invalid character. please try again");
-            }           
-            
+            }
+
         }
     }
 
