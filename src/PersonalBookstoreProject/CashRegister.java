@@ -253,7 +253,7 @@ public class CashRegister implements CashDrawer {
             if (mag.contains("|")) {
                 int start = 0;
                 int end = mag.indexOf("|");
-                mag = mag.substring(start, end);
+                mag = mag.substring(start, end);//removes part of magstring due to hardware level issues
             }
         }
         employees.add(new Employee(userKey, isManager, name, payRate, usesMag, mag));
@@ -438,9 +438,9 @@ public class CashRegister implements CashDrawer {
     }
 /**
  * validates if magCard matches user key
- * @param userKey
- * @param mag
- * @return 
+ * @param userKey user being validates
+ * @param mag magcard swiped
+ * @return true if magcard matches one on file
  */
     public boolean validateMagCard(int userKey, String mag) {
 
@@ -448,7 +448,7 @@ public class CashRegister implements CashDrawer {
             int start = 0;
             int end = mag.indexOf("|");
             mag = mag.substring(start, end);
-        }
+        }//removes part of magstring due to hardware level issues
         for (Employee e : employees) {
             if (e.getUserKey() == userKey) {
                 if (e.usesMagCard() == true) {
@@ -460,12 +460,18 @@ public class CashRegister implements CashDrawer {
         }
         return false;
     }
-
+/**
+ * Validates that magcard belongs to a manager regardless of user key
+ * @param mag card swiped being validated
+ * @param function function user is wanting approval for
+ * @param cashierKey key of user requestiong approval
+ * @return true if key belongs to any manager
+ */
     public boolean validateMagCardSolo(String mag, String function, int cashierKey) {
         if (mag.contains("?") || mag.contains("|")) {
             int start = 0;
             int end = mag.indexOf("|");
-            mag = mag.substring(start, end);
+            mag = mag.substring(start, end);//removes part of magstring due to hardware level issues
         }
         for (Employee e : employees) {
             if (e.usesMagCard() == true) {
@@ -483,13 +489,24 @@ public class CashRegister implements CashDrawer {
         }
             return false;
         }
-    
+    /**
+     * Exports employee data to another file
+     * @return employee array
+     */
     public ArrayList<Employee> importEmployeeData(){
         return employees;
     }
+    /**
+     * imports purchase log from another file
+     * @param s purcahse log
+     */
     public void importPurchaseLog(ArrayList<String> s){
         purchases = s;
     }
+    /**
+     * Counts new members that are registered
+     * @param userKey Key of user registering new members, used to track new memebrs per user
+     */
     public void countNewMembers(int userKey){
         newMembers++;
         for(Employee e:employees){

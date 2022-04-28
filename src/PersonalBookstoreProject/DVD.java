@@ -42,10 +42,6 @@ public class DVD extends Products {
     public void setCatagory(String catagory) {
         this.catagory = catagory;
     }
-    public void setNumberPurchased(int i){
-        numPurcahsed=i;
-    }public int getNumberPurchased(){
-        return numPurcahsed;
-    }
+
 
 }

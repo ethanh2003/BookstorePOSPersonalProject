@@ -21,14 +21,17 @@ import java.util.logging.Logger;
  * @author Ethan Herring
  */
 public class Purchase implements BookstoreSpecification, ValidationCheck {
-    CashRegister cashDrawer=new CashRegister();
+
+    CashRegister cashDrawer = new CashRegister();
     private ArrayList<Products> inventory = new ArrayList<Products>();
     private ArrayList<Customers> customerData = new ArrayList<Customers>();
     private ArrayList<Employee> employees = cashDrawer.importEmployeeData();
     private ArrayList<String> reciept = new ArrayList<>();
     private ArrayList<Products> dailyPurchaseLog = new ArrayList<>();
-    
 
+    /**
+     * reads saved data files for products and customers
+     */
     public Purchase() {
         try {
             //productInventory.csv
@@ -132,8 +135,8 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
                 System.out.println("***************************");
                 reciept.add("Title: " + inventory.get(i).getName() + "\nAuthor: " + inventory.get(i).getAuthor()
                         + "\nBarcode: " + inventory.get(i).getBarcode() + "\nPrice: " + inventory.get(i).getPrice() + "\nStock Left: " + inventory.get(i).getStock());
-               int num=inventory.get(i).getNumberPurchased()+1;
-                inventory.get(i).setNumberPurchased(num); 
+                int num = inventory.get(i).getNumberPurchased() + 1;
+                inventory.get(i).setNumberPurchased(num);
                 dailyPurchaseLog.add(inventory.get(i));
 
                 if (inventory.get(i).getStock() == 0) {
@@ -219,7 +222,6 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
 
     /**
      * Returns all items in inventory
-     *
      */
     public void getInventory() {
         for (int i = 0; i < inventory.size(); i++) {
@@ -426,6 +428,17 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
         }
     }
 
+    /**
+     * Creates reciept; prints one in system and outputs a copy to txt file
+     *
+     * @param subTotal order total before discount
+     * @param total total after discount
+     * @param memberID customer id
+     * @param cashierNum cashier performing sale
+     * @param discount discount given based on rewards
+     * @param paymentMethod cash or card
+     * @param totalGiven cash given to cashier
+     */
     public void reciept(double subTotal, double total, int memberID, int cashierNum, double discount, String paymentMethod, double totalGiven) {
         FileOutputStream recieptWriter = null;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy HH_mm_ss");
@@ -458,7 +471,7 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             recieptWriter = new FileOutputStream("./reciepts/" + dtf.format(now) + ".txt");
             PrintWriter recieptOut = new PrintWriter(recieptWriter);
             System.out.println("**********");
-
+//Prints reciept in terminal
             System.out.println("****************");
             System.out.println(dtf.format(now));
             for (String s : reciept) {
@@ -488,9 +501,9 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
             System.out.println("Email: " + email);
 
             System.out.println("****************");
-
+//Prints reciept to .txt file
             recieptOut.println("****************");
-                        recieptOut.println(dtf.format(now));
+            recieptOut.println(dtf.format(now));
             for (String s : reciept) {
                 recieptOut.println("***************");
                 recieptOut.println(s);
@@ -525,7 +538,7 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
         } finally {
             try {
                 recieptWriter.close();
-                for(int i = 0;i<reciept.size();i++){
+                for (int i = 0; i < reciept.size(); i++) {
                     reciept.remove(i);
                 }
 
@@ -535,6 +548,9 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
         }
     }
 
+    /**
+     * Saves product and customer data to csv file
+     */
     public void saveData() {
         FileOutputStream inventoryFS = null;
         FileOutputStream customerFS = null;
@@ -576,33 +592,40 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
         }
     }
 
+    /**
+     * prints customer data
+     */
     public void getListOfCustomers() {
         for (Customers c : customerData) {
             System.out.println("Name: " + c.getName() + " Birthday: " + c.getBirthday() + " Member Number: " + c.getMemberNumber()
                     + " Is Premium? " + c.isPremium() + " Email: " + c.getEmail() + " Total Spent: " + c.getTotalSpent());
         }
     }
-    
-    public ArrayList<String> condensePurchaseLog(){
+
+    /**
+     * condenses purchase log
+     *
+     * @return log of daily purchases
+     */
+    public ArrayList<String> condensePurchaseLog() {
         ArrayList<String> purchases = new ArrayList<>();
-        ArrayList<String> duplicateRemover=new ArrayList<>();
+        ArrayList<String> duplicateRemover = new ArrayList<>();
         int count = 0;
-       for(Products p: dailyPurchaseLog){
-           for(int i =0;i<dailyPurchaseLog.size();i++){
-               if(p.getBarcode()==dailyPurchaseLog.get(i).getBarcode()){
-                  count++;
-           }
-       }
-           purchases.add(p.getName()+" was purcahsed "+count+" times today");
-           count=0;
-    }for(String s:purchases){
-        if(!duplicateRemover.contains(s)){
-            duplicateRemover.add(s);
+        for (Products p : dailyPurchaseLog) {
+            for (int i = 0; i < dailyPurchaseLog.size(); i++) {
+                if (p.getBarcode() == dailyPurchaseLog.get(i).getBarcode()) {
+                    count++;
+                }
+            }
+            purchases.add(p.getName() + " was purcahsed " + count + " times today");
+            count = 0;
         }
+        for (String s : purchases) {
+            if (!duplicateRemover.contains(s)) {
+                duplicateRemover.add(s);
+            }
+        }
+        return duplicateRemover;
     }
-       return duplicateRemover;
-    }
-
-
 
 }

@@ -93,7 +93,8 @@ public class POS {
                     } else {
                         System.out.println("Manager Required to Initalize Till");
                         System.out.println("Enter 1 to have manager swipe and 2 to log in again");
-                        int managerSwipe = sc.nextInt();
+                        
+                        int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function//Allows user to swipe manager card to give temporary access to manager function//Allows user to swipe manager card to give temporary access to manager function
                         if (managerSwipe == 2) {
                             System.out.println("Please enter Login Key:");
                             userKey = sc.nextInt();
@@ -254,8 +255,8 @@ public class POS {
                             cashDrawer.chargeSale(orderTotal,userKey);
                             method = "card";
                         }
-                        // purchase.reciept(subTotal,orderTotal,customerID,userKey,discount);
                         purchase.reciept(subTotal, orderTotal, customerID, userKey, discount, method, cashGiven);
+                        //creates user reciept
                         break;
                     case 2:
                         if (cashDrawer.validateManagerKey(userKey)) {
@@ -280,7 +281,7 @@ public class POS {
                         } else {
                             System.out.println("Manager is required for this function");
                             System.out.println("Enter 1 for manager swipe and 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -330,7 +331,7 @@ public class POS {
                         } else {
                             System.out.println("Manager is required for this function");
                             System.out.println("Enter 1 for manager swipe and 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -381,7 +382,7 @@ public class POS {
                         } else {
                             System.out.println("Manager is required for this function");
                             System.out.println("Enter 1 for manager swipe and 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -494,7 +495,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -559,7 +560,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -623,7 +624,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -672,7 +673,7 @@ public class POS {
                             valid = false;
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -733,7 +734,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -787,7 +788,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -821,7 +822,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -852,7 +853,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -877,7 +878,7 @@ public class POS {
                         } else {
                             System.out.println("Manager Access is required for this function");
                             System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                            int managerSwipe = sc.nextInt();
+                            int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
                             if (managerSwipe == 1) {
                                 System.out.println("Please swipe User Mag Card");
                                 String mag = sc.next();
@@ -900,6 +901,7 @@ public class POS {
                     case 22:
                         //Requires entering manager key even if logged in as one. 
                         //makes user realize they are exiting the program
+                        //68403 is used as a universal override to exit program without running EOD procedures
                         System.out.println("Manager Key Required for exit.");
                         System.out.println("Please enter Manager Key:");
                         int tempXitKey = sc.nextInt();
