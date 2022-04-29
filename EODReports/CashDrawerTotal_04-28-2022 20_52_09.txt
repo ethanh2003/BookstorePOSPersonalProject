@@ -1,0 +1,47 @@
+		END OF DAY REPORT		
+Ran by: Ethan
+Date: 04-28-2022 Time: 20:52:09
+***************************
+Total Sales: 0.0
+Credit/Debit Card Sales: 0.0
+Cash Sales: 0.0
+Paid In Total: 0.0
+Paid Out Total: 0.0
+Total Comps: 19
+****************************
+Amount Expected in Drawer: 100.0
+Starting Balance: 100.0
+Drop Amount: 0.0
+****************************
+Paid in's
+****************************
+Paid Out's
+********************************
+Sales Per User
+User Name:	Total Sales: 
+Sarah		0.0
+Jamie		0.0
+Ethan		0.0
+Alex		0.0
+Jade		0.0
+Carter		0.0
+June		0.0
+********************************
+New Members: 0
+Sarah		0
+Jamie		0
+Ethan		0
+Alex		0
+Jade		0
+Carter		0
+June		0
+********************************
+Manager Comps
+Ethan Applied $19.0 Discount	 Reason: Owner
+********************************
+Manager Overrides
+********************************
+Todays purcahses
+brave new world was purcahsed 1 times today
+***************************
+Total was not reset. Current Drawer Total is: 100.0

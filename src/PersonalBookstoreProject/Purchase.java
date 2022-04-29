@@ -33,6 +33,14 @@ public class Purchase implements BookstoreSpecification, ValidationCheck {
      * reads saved data files for products and customers
      */
     public Purchase() {
+                        customerData.add(new Member("Test1", "september 6th 2003", "eherrin6@uncc.edu",
+                        230.45, 801223094));
+                customerData.add(new PremiumMember("Test2", "December 6th 2003", "eherrin7@uncc.edu",
+                        90.45, 801223095, true, 2432));
+                customerData.add(new Member("Test3", "October 6th 2003", "eherrin3@uncc.edu",
+                        150.45, 801223096));
+                customerData.add(new PremiumMember("Test17", "september 6th 2000", "eherrin@uncc.edu",
+                        455.45, 801223097, true, 3456));
         try {
             //productInventory.csv
 

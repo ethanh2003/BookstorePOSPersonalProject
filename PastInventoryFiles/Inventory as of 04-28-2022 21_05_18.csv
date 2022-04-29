@@ -99,7 +99,7 @@ productID,type,title,author/artist,numInStock,price
 97,cd,Instinct,Gabby Gecks,48,11.37
 98,cd,Monsieur Vincent,Tamarah Stow,4,12.18
 99,book,Inn in Tokyo An (Tôkyô no yado),Niven Styan,43,18.7
-100,dvd,Tobruk,Aidan Spino,28,22.93
+100,dvd,Tobruk,Aidan Spino,29,22.93
 101,cd,Serious Man A,Aldrich Moran,29,10.6
 102,cd,Guns of the Magnificent Seven,Mamie Artus,12,17.99
 103,book,Mind Game,Caren Burbridge,35,7.36
@@ -908,4 +908,109 @@ productID,type,title,author/artist,numInStock,price
 906,dvd,Human Touch,Augustine Schwander,34,29.63
 907,cd,Delphine 1 Yvan 0,Gardener Tomala,15,25.42
 908,dvd,Don Verdean,Jacquenetta Tale,31,8.73
-909,book,Ichi the
+909,book,Ichi the Killer (Koroshiya 1),Suzanna Paireman,4,14.05
+910,book,Last Vegas,Alaster Sibbs,10,19.93
+911,dvd,Seventh Veil The,Emmy Haensel,45,25.33
+912,dvd,Morning Glory,Rahel De la Zenne,25,23.73
+913,dvd,Antonio das Mortes (O Dragão da Maldade contra o Santo Guerreiro),Ingrim Brok,50,19.34
+914,dvd,Underdog,Shanon Ikins,6,24.78
+915,cd,First Love,Amity Durbridge,34,20.59
+916,cd,Cloud Atlas,Arlene Stopps,32,12.34
+917,book,First Position,Marni Goldman,10,19.2
+918,book,Holy Land The,Bianca Sturt,27,13.24
+919,dvd,Ex-Girlfriends,Cindy Warlawe,26,19.64
+920,dvd,Adventures of Felix The (a.k.a. Funny Felix) (Drôle de Félix),Tab Do Rosario,33,29.98
+921,cd,Swindle The (Rien ne va plus),Lisbeth Coggeshall,44,29.92
+922,dvd,Quartet,Coleman Jenkyn,41,27.89
+923,cd,Lost City The,Tilda Glasebrook,28,24.2
+924,book,Die Another Day,Aidan Burder,37,15.92
+925,book,Lake A (Un lac),Carrissa Moors,41,19.1
+926,book,Belle époque,Donetta Lempke,46,15.19
+927,dvd,Somebody Up There Likes Me,Hallsy Wolsey,2,22.45
+928,book,Hunchback of Notre Dame The,Briney Hembery,42,20.86
+929,dvd,Gambit,Petr Kochel,27,23.36
+930,book,Gold Diggers of 1933,Nicolina Burtonwood,3,28.49
+931,book,Always Outnumbered,Gussi Conew,17,26.23
+932,book,Memories (Memorîzu),Laina Harman,14,28.27
+933,dvd,Huckleberry Finn,Zsazsa St. Quintin,18,27.88
+934,book,Crave,Weston Youthead,6,26.94
+935,book,Shadow People,Sawyer Pickover,19,11.93
+936,cd,Turks & Caicos,Maynard Colrein,21,25.25
+937,book,Ah Wilderness!,Dredi Oxford,16,17.68
+938,cd,Hurricane Express The,Cristy Whitewood,35,11.71
+939,book,I Was A Communist for the FBI,Valentino Bartell,15,26.44
+940,book,From Beyond the Grave (Creatures),Kirk Hallstone,25,18.98
+941,book,Pitch Black,Robinette Iban,29,13.14
+942,book,Junior Prom,Fonz Boutellier,9,18.72
+943,book,Liability The,Cyril Marsh,2,10.56
+944,dvd,War Inc.,D'arcy Jeandin,25,22.73
+945,dvd,Tortured,Mallory Sampson,46,19.33
+946,book,For a Lost Soldier (Voor een Verloren Soldaat),Janetta Arnholdt,48,10.34
+947,dvd,Wildcats,Hendrik Nayer,26,8.36
+948,cd,Summer Holiday,Morten Huertas,38,29.26
+949,dvd,Filth and Wisdom,Vivi Beine,26,18.89
+950,dvd,Longest Yard The,Ethelred Bramall,21,23.57
+951,book,Cabin Fever: Patient Zero,Peder Frunks,29,9.68
+952,cd,7th Dawn The,Petunia Leckenby,48,28.63
+953,cd,Girl from the Naked Eye The,Carena Bannister,4,9.52
+954,dvd,No Time for Nuts,Kort Valens-Smith,22,8.71
+955,book,Hunter The,Sutherlan Eidelman,29,20.2
+956,cd,Homesman The,Jamil Bryett,34,14.2
+957,book,Return of the Killer Tomatoes!,Belita Gotcliff,19,21.75
+958,dvd,Black Moon,Hadley Sadd,11,24.91
+959,book,Luna La,Hayward Demsey,27,29.39
+960,dvd,Joanna,Ashien Caseri,19,14.9
+961,cd,Just Like Heaven,Worthington Poller,34,17.44
+962,cd,Architecture of Doom The (Undergångens arkitektur),Ichabod Beetles,39,7.41
+963,dvd,Stereo,Edouard Stapleton,23,16.58
+964,cd,Dames du Bois de Boulogne Les (Ladies of the Bois de Boulogne The) (Ladies of the Park),Ambros Bracey,5,23.16
+965,dvd,Puzzlehead,Vally Lissandri,44,29.65
+966,book,Russell Brand: Messiah Complex,Aurora Balloch,15,8.96
+967,dvd,Last Dance,Carroll Garret,28,12.3
+968,cd,Bad Girls Go To Hell,Jerald Bardwall,16,18.39
+969,dvd,Dersu Uzala,Nadean Serjeant,45,13.08
+970,dvd,Right Now (À tout de suite),Gaelan Mollett,42,10.07
+971,cd,Hall Pass,Marleen Dessant,18,12.1
+972,dvd,Singh Is Kinng,Graham Welford,44,21.38
+973,dvd,Sunday Day in Hell A (En forårsdag i Helvede),Leonard Monroe,47,14.08
+974,book,Brain Damage,Max Lenz,44,27.28
+975,book,Olivier Olivier,Isac Brewerton,1,25.65
+976,cd,Finger The (Dedo El),Rene Northway,40,11.52
+977,cd,I'm All Right Jack,Reuven Bysaker,2,19.67
+978,dvd,Three Burials of Melquiades Estrada The,Shari Haxley,16,17.22
+979,book,Prisoners,Nadine Wantling,32,23.36
+980,book,K.G. (Karate Girl),Mercedes Cummungs,22,27.49
+981,cd,Elvira Mistress of the Dark,Britteny Blackaby,1,17.6
+982,cd,Lauderdale (a.k.a. Spring Break USA) (a.k.a. Spring Fever USA),Cleve Brusle,5,23.85
+983,book,Blue Velvet,Elmira D'Souza,16,21.18
+984,book,Who's the Caboose?,Faydra Semper,8,8.56
+985,book,Joe Strummer: The Future Is Unwritten,Gusta Panks,24,29.56
+986,dvd,Time Stood Still (Il tempo si è fermato),Elbertina Rangell,43,18.27
+987,dvd,Three Times (Zui hao de shi guang),Andria Broggelli,3,22.25
+988,cd,Lola and Billy the Kid (Lola + Bilidikid),Teodora Anthes,39,17.83
+989,book,Friends The (Les Amis),Elvis Lisamore,21,9.58
+990,dvd,Lara Croft Tomb Raider: The Cradle of Life,Rees Barus,49,24.96
+991,dvd,Guest House Paradiso,Jedidiah Tester,14,14.11
+992,book,Personal Effects,Justino Jurs,29,28.2
+993,dvd,Shrimp on the Barbie The,Dickie Stealfox,49,21.28
+994,cd,God's Puzzle (Kamisama no pazuru),Westbrook Ruppel,3,10.06
+995,book,The Boy in the Mirror,Marianne Paler,47,24.95
+996,book,Eye of Vichy The (Oeil de Vichy L'),Massimo Eirwin,43,8.94
+997,cd,Tomorrow the World!,Ronni Greber,42,26.68
+998,book,Safe Passage,Huntington Rushford,20,12.67
+999,dvd,Delhi-6,Mendie Pude,47,23.25
+1000,book,Breakfast with Scot,Sholom Skeete,8,14.75
+1001,cd,20 Seconds of Joy,Tommi Restieaux,46,17.24
+1002,cd,Godzilla vs. Destroyah (Gojira vs. Desutoroiâ) ,Adams Wike,35,23.2
+1003,book,Tiger and the Snow The (La tigre e la neve),Ashlen Boschmann,38,16.37
+1004,dvd,Blindness,Dory Lambourn,12,28.88
+1005,dvd,Story of Floating Weeds A (Ukikusa monogatari),Felizio Bigland,29,25.12
+1006,book,Cinemania,Clea Challes,50,19.8
+1007,book,Aimée & Jaguar,Felic Von Der Empten,4,15.84
+1008,book,Jay And Silent Bob's Super Groovy Cartoon Movie,Cortie MacCambridge,30,24.21
+1009,dvd,Wal-Mart: The High Cost of Low Price,Sarajane Cobley,40,17.42
+1010,book,Wizard The,Barry Cureton,19,27.2
+1011,book,Let Him Have It,Colver Barnham,16,27.6
+1012,dvd,U2 3D,Harriot Hassent,19,22.37
+1013,cd,The Little Matchgirl,Aurore Frankom,34,26.37
+1014,dvd,Hard Ticket to Hawaii,Shani Iacopo,34,27.24
