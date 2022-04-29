@@ -40,18 +40,15 @@ public class CashRegister implements CashDrawer {
     private ArrayList<String> purchases;
     private ArrayList<String> managerComps = new ArrayList<>();
     private int compTotal = 0;
+    private ArrayList<GiftCards> giftcards = new ArrayList<>();
 
     /**
      * Reads saved employee data
      */
     public CashRegister() {
         Scanner fileScanner;
-//                            employees.add(new Employee(3214, true, "Sarah", 16.00, true, ";:<>9772231704?"));
-//            employees.add(new Employee(2123, true, "Jamie", 12.00, true, "%S3JIHLS2V0LI?;290510160?"));
-//            employees.add(new Employee(1111, true, "Ethan", 20.00, false, "0"));
-//            employees.add(new Employee(2222, false, "Alex", 10.00, false, "0"));
-//            employees.add(new Employee(5324, false, "Jade", 10.00, false, "0"));
-//            employees.add(new Employee(4241, false, "Carter", 11.00, false, "0"));
+        giftcards.add(new GiftCards(100,1234));
+        giftcards.add(new GiftCards(50,2133));
         try {
             fileScanner = new Scanner(new File("EmployeeData.csv"));
             fileScanner.nextLine();
@@ -72,10 +69,18 @@ public class CashRegister implements CashDrawer {
                 }
                 employees.add(new Employee(Integer.parseInt(userKey), Boolean.parseBoolean(isManager), name, Double.parseDouble(payRate), Boolean.parseBoolean(usesMagCard), magCard));
             }
+            fileScanner = new Scanner(new File("GiftCardData.csv"));
+            fileScanner.nextLine();
+            while (fileScanner.hasNext()) {
+                String line = fileScanner.nextLine();
+                String[] lineSpliter = line.split(",");
+                int cardNumber = Integer.parseInt(lineSpliter[1]);
+                Double amount = Double.parseDouble(lineSpliter[0]);
+                giftcards.add(new GiftCards(amount, cardNumber));
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(CashRegister.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -126,7 +131,7 @@ public class CashRegister implements CashDrawer {
             outFS.println("Cash Sales: " + cashTotal);
             outFS.println("Paid In Total: " + paidInTotal);
             outFS.println("Paid Out Total: " + paidOutTotal);
-            outFS.println("Total Comps: "+ compTotal);
+            outFS.println("Total Comps: " + compTotal);
             outFS.println("****************************");
             outFS.println("Amount Expected in Drawer: " + Math.round(amountInDrawer * 100.0) / 100.0);
             outFS.println("Starting Balance: " + startingTotal);
@@ -159,7 +164,7 @@ public class CashRegister implements CashDrawer {
             }//key 977223 is blocked because it should not be used for sign in and sales, only for keycard
             outFS.println("********************************");
             outFS.println("Manager Comps");
-            for(String s:managerComps){
+            for (String s : managerComps) {
                 outFS.println(s);
             }
             outFS.println("********************************");
@@ -392,26 +397,45 @@ public class CashRegister implements CashDrawer {
      * Writes and saves employee data to file
      */
     public void saveEmployees() {
-        FileOutputStream employeeFS = null;
         try {
-            employeeFS = new FileOutputStream("./EmployeeData.csv");
-            PrintWriter employeeOut = new PrintWriter(employeeFS);
-            employeeOut.println("userKey,isManager,name,payRate,usesMagCard,MagCard");
-            for (Employee e : employees) {
-                String card = e.getMagCard();
-                employeeOut.println(e.getUserKey() + "," + e.isManager() + "," + e.getName() + "," + e.getPayRate() + "," + e.usesMagCard() + "," + e.getMagCard());
-
-            }
-            employeeOut.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(CashRegister.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+            FileOutputStream employeeFS = null;
             try {
-                employeeFS.close();
-            } catch (IOException ex) {
+                employeeFS = new FileOutputStream("./EmployeeData.csv");
+                PrintWriter employeeOut = new PrintWriter(employeeFS);
+                employeeOut.println("userKey,isManager,name,payRate,usesMagCard,MagCard");
+                for (Employee e : employees) {
+                    String card = e.getMagCard();
+                    employeeOut.println(e.getUserKey() + "," + e.isManager() + "," + e.getName() + "," + e.getPayRate() + "," + e.usesMagCard() + "," + e.getMagCard());
+
+                }
+                employeeOut.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(CashRegister.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    employeeFS.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(CashRegister.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            FileOutputStream giftCardsFS = null;
+            try {
+                giftCardsFS = new FileOutputStream("./GiftCardData.csv");
+                PrintWriter giftOut = new PrintWriter(giftCardsFS);
+                giftOut.println("amount,cardNumber");
+                for (GiftCards g : giftcards) {
+                    giftOut.println(g.getAmount() + "," + g.getCardNumber());
+                }
+                giftOut.close();
+            } catch (FileNotFoundException ex) {
                 Logger.getLogger(CashRegister.class.getName()).log(Level.SEVERE, null, ex);
             }
+            giftCardsFS.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CashRegister.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**
@@ -615,6 +639,33 @@ public class CashRegister implements CashDrawer {
                 }
             }
         }
+        return 0;
+    }
+
+    public double giftCard(int number, double amount, int userKey) {
+        for (GiftCards g : giftcards) {
+            if (number == g.getCardNumber()) {
+                if (g.getAmount() >= amount) {
+                    for (Employee e : employees) {
+                        if (userKey == e.getUserKey()) {
+                            double userSales = e.getTotalSales() + amount;
+                            e.setTotalSales(userSales);
+                        }
+                    }
+                    return g.makePurchase(amount);
+                } else {                    
+                    double amountOwed = g.makePurchase(amount);
+                    for (Employee e : employees) {
+                        if (userKey == e.getUserKey()) {
+                            double userSales = e.getTotalSales() + (amount-amountOwed);
+                            e.setTotalSales(userSales);
+                        }
+                    }
+                    return 0 - amountOwed;
+                }
+            }
+        }
+
         return 0;
     }
 
