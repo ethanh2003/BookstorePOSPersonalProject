@@ -271,25 +271,29 @@ public class POS {
                                     newTotal=cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, 0, percentDiscount, discountReason);
 
                                 }
+                                System.out.println("Total: "+newTotal);
                             }
                         }
                         while (!validNum) {
                             //loops until user chooses valid number
-                            System.out.println("Select 1 for cash and 2 for card");
+                            System.out.println("Select 1 for cash, 2 for Credit/Debit card, and 3 for giftcard");
                             paymentType = sc.nextInt();
-                            if (paymentType != 1 && paymentType != 2) {
+                            if (paymentType != 1 && paymentType != 2&&paymentType!=3) {
                                 //loops until user chooses valid number                            
                                 System.out.println("Enter a valid Number");
                             } else {
                                 validNum = true;
                             }
                         }
-                        String method = null;
+                        String method = " ";
                         double cashGiven = 0;
+                        double amountOwed=newTotal;
+                        while(amountOwed>0){
                         if (paymentType == 1) {
-                            method = "cash";
-                            boolean validCash = false;
-                            while (!validCash) {
+                           
+                                method=method+"\ncash: "+cashGiven;
+                            
+                            
                                 //loops until cash paid is greater than or equal to toal
                                 System.out.println("Enter Cash given:");
                                 cashGiven = sc.nextDouble();
@@ -299,16 +303,48 @@ public class POS {
                                     //calcualtes change owed
                                     System.out.println("You owe them " + changeOwed);
                                     cashDrawer.cashSale(newTotal, userKey);
-                                    validCash = true;
                                 } else {
-                                    System.out.println("Amount does not cover total bill. \nPlease enter valid amount");
+                                    amountOwed+=changeOwed;
                                 }
-                            }
+                            
                         } else if (paymentType == 2) {
+                            double chargeAmount=0.0;
                             //adds sales to charge total
-                            cashDrawer.chargeSale(newTotal, userKey);
-                            method = "card";
+                            valid=false;
+                            while(valid){
+                            System.out.println("Enter Amount to charge");
+                             chargeAmount=sc.nextDouble();
+                            if(chargeAmount>0){
+                                valid=true;
+                            }else{
+                                System.out.println("Enter a number above 0");
+                            }
+                            }
+                            cashDrawer.chargeSale(chargeAmount, userKey);
+
+                                method=method+"\nCredit/Debit card: "+chargeAmount;
+                            
+                            amountOwed-=chargeAmount;
+                        }else if(paymentType==3){
+                            
+                            System.out.println("Enter Card Number");
+                            int giftCardNumber = sc.nextInt();
+                            double number = cashDrawer.giftCard(giftCardNumber, newTotal,userKey);
+                            if(number>=0){
+                                System.out.println("You have "+number+" left on Gift Card");
+                                amountOwed=0;
+                            }else{
+                                amountOwed=newTotal-number;
+                            }
+                                if(number<0){
+                            method=method+"\nGift card: "+Math.abs(number);
+                           }else{
+                                method=method+"\nGift card: "+amountOwed;
+                            }
+                            
                         }
+                        }
+                        
                         double customDiscount=orderTotal-newTotal;
                         purchase.reciept(subTotal, newTotal, customerID, userKey, discount, method, cashGiven,customDiscount);
                         //creates user reciept
