@@ -4,3 +4,6 @@
 /reciepts/
 
 
+customerData.csv
+productInventory.csv
+*.xml
