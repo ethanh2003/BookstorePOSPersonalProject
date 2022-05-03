@@ -39,7 +39,7 @@ public class CashRegister implements CashDrawer {
     private ArrayList<String> managerApproval = new ArrayList<>();
     private ArrayList<String> purchases;
     private ArrayList<String> managerComps = new ArrayList<>();
-    private int compTotal = 0;
+    private double compTotal = 0;
 
     /**
      * Reads saved employee data
@@ -126,7 +126,7 @@ public class CashRegister implements CashDrawer {
             outFS.println("Cash Sales: " + cashTotal);
             outFS.println("Paid In Total: " + paidInTotal);
             outFS.println("Paid Out Total: " + paidOutTotal);
-            outFS.println("Total Comps: "+ compTotal);
+            outFS.println("Total Comps: "+ Math.round(compTotal * 100.0) / 100.0);
             outFS.println("****************************");
             outFS.println("Amount Expected in Drawer: " + Math.round(amountInDrawer * 100.0) / 100.0);
             outFS.println("Starting Balance: " + startingTotal);
@@ -575,23 +575,27 @@ public class CashRegister implements CashDrawer {
                         newTotal = subTotal - (subTotal * .40);
                         managerComps.add(e.getName() + "Applied Employee Discount\t Employee Name: " + reason);
                         compTotal += subTotal - newTotal;
+                        newTotal= Math.round(newTotal * 100.0) / 100.0;
                         return newTotal;
                     case 2:
                         newTotal = subTotal - (subTotal * .20);
                         managerComps.add(e.getName() + "Applied 20% Discount\t Reason: " + reason);
                         compTotal += subTotal - newTotal;
+                        newTotal= Math.round(newTotal * 100.0) / 100.0;
 
                         return newTotal;
                     case 3:
                         newTotal = subTotal - (subTotal * .10);
                         managerComps.add(e.getName() + " Applied 10% Discount\t Reason: " + reason);
                         compTotal += subTotal - newTotal;
+                        newTotal= Math.round(newTotal * 100.0) / 100.0;
 
                         return newTotal;
                     case 4:
                         newTotal = subTotal - (subTotal * .65);
                         managerComps.add(e.getName() + " Applied Manager Discount\t Employee Name: " + reason);
                         compTotal += subTotal - newTotal;
+                        newTotal= Math.round(newTotal * 100.0) / 100.0;
 
                         return newTotal;
                     case 5:
@@ -608,6 +612,7 @@ public class CashRegister implements CashDrawer {
                         return newTotal;
                     case 7:
                         newTotal = subTotal - (subTotal * customPercentDecimal);
+                        newTotal= Math.round(newTotal * 100.0) / 100.0;
                         managerComps.add(e.getName() + " Applied " + customPercent + "% Discount\t Reason: " + reason);
                         compTotal += subTotal - newTotal;
 
@@ -617,9 +622,4 @@ public class CashRegister implements CashDrawer {
         }
         return 0;
     }
-
-    /**
-     * Problem with paidin/paidout reasons translating from pos to cashregister
-     * class
-     */
 }
