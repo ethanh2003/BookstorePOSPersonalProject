@@ -7,3 +7,4 @@
 customerData.csv
 productInventory.csv
 *.xml
+test/POS.java
