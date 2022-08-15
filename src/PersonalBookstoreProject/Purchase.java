@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class Purchase implements BookstoreSpecification, ValidationCheck {
 
-    CashRegister cashDrawer = new CashRegister();
+    CashDrawer cashDrawer = new CashDrawer();
     private ArrayList<Products> inventory = new ArrayList<Products>();
     private ArrayList<Customers> customerData = new ArrayList<Customers>();
     private ArrayList<Employee> employees = cashDrawer.importEmployeeData();

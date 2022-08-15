@@ -19,6 +19,7 @@ public class Employee {
     private String magCard;
     private double totalSales;
     private int membersRegistered;
+    private int drawerNumber;
     
     /**
      * Employee constructor
@@ -30,6 +31,7 @@ public class Employee {
      * @param magCard magcard number if used, 0 otherwise
      */
     public Employee(int userKey,boolean isManager,String name,double payRate,boolean usesMagCard,String magCard){
+        this.drawerNumber=drawerNumber;
         this.userKey=userKey;
         this.isManager=isManager;
         this.name=name;
@@ -136,6 +138,7 @@ public class Employee {
     public int getNumberMembersRegistered(){
         return membersRegistered;
     }
+
     
   /*  public double calculateCheck(double hoursWorked){
         double paycheck = hoursWorked*payRate;

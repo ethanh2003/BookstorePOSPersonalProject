@@ -30,7 +30,8 @@ public class POS {
         System.out.println("Manager Override MagCard: 977223");
         System.out.println("*************************");
         Purchase purchase = new Purchase();
-        CashRegister cashDrawer = new CashRegister();
+        CashDrawer Drawer1 = new CashDrawer();
+
         purchase.createPastInventory();
 
         boolean exit = false;
@@ -58,13 +59,13 @@ public class POS {
 
                     System.out.println("Please enter Login Key:");
                     userKey = sc.nextInt();
-                    if (cashDrawer.validateAllKeys(userKey) == true || userKey == 68403) {
+                    if (Drawer1.validateAllKeys(userKey) == true || userKey == 68403) {
                         //68403 is being used as an override key during testing. can only create a new employee.
 
-                        if (cashDrawer.usesMag(userKey)) {
+                        if (Drawer1.usesMag(userKey)) {
                             System.out.println("Please swipe User Mag Card");
                             String mag = sc.next();
-                            if (cashDrawer.validateMagCard(userKey, mag)) {
+                            if (Drawer1.validateMagCard(userKey, mag)) {
                                 validKey = true;
                             } else {
                                 System.out.println("Invalid Mag Card");
@@ -78,7 +79,7 @@ public class POS {
                     }
                 }
                 while (!tillStarted) {//loops until manager opens till
-                    if (cashDrawer.validateManagerKey(userKey) == true || userKey == 68403) {  //checks if user is manager
+                    if (Drawer1.validateManagerKey(userKey) == true || userKey == 68403) {  //checks if user is manager
                         boolean validTotal = false;
                         while (!validTotal) {   //loops until till amount is over 0
                             System.out.println("Enter Starting Till Amount:");
@@ -89,7 +90,7 @@ public class POS {
                                 validTotal = true;
                             }
                         }
-                        cashDrawer.startingDrawerTotal(startTotal);
+                        Drawer1.startingDrawerTotal(startTotal);
                         //creates drawer
                         tillStarted = true;
                     } else {
@@ -103,7 +104,7 @@ public class POS {
                         } else {
                             System.out.println("Please swipe User Mag Card");
                             String mag = sc.next();
-                            if (cashDrawer.validateMagCardSolo(mag, "Initalizing Till", userKey)) {
+                            if (Drawer1.validateMagCardSolo(mag, "Initalizing Till", userKey)) {
                                 boolean validTotal = false;
                                 while (!validTotal) {   //loops until till amount is over 0
                                     System.out.println("Enter Starting Till Amount:");
@@ -114,7 +115,7 @@ public class POS {
                                         validTotal = true;
                                     }
                                 }
-                                cashDrawer.startingDrawerTotal(startTotal);
+                                Drawer1.startingDrawerTotal(startTotal);
                                 //creates drawer
                                 tillStarted = true;
                             } else {
@@ -214,7 +215,7 @@ public class POS {
                         int apply = sc.nextInt();
                         if (apply == 1) {
                             boolean manager = false;
-                            if (cashDrawer.validateManagerKey(userKey)) {
+                            if (Drawer1.validateManagerKey(userKey)) {
                                 manager = true;
                             } else {
                                 System.out.println("Manager is required for this function");
@@ -223,7 +224,7 @@ public class POS {
                                 if (managerSwipe == 1) {
                                     System.out.println("Please swipe User Mag Card");
                                     String mag = sc.next();
-                                    if (cashDrawer.validateMagCardSolo(mag, "Apply Discount", userKey)) {
+                                    if (Drawer1.validateMagCardSolo(mag, "Apply Discount", userKey)) {
                                         manager = true;
                                     }
                                 }
@@ -241,24 +242,24 @@ public class POS {
                                 if (choice == 1 || choice == 4) {
                                     System.out.println("Enter Employee Name: ");
                                     String employeeName = sc.next();
-                                    newTotal = cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, employeeName);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, employeeName);
                                 } else if (choice == 2 || choice == 3 || choice == 5) {
                                     System.out.println("Enter Reason");
                                     String discountReason = sc.next();
-                                    newTotal = cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, discountReason);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, discountReason);
                                 } else if (choice == 6) {
                                     System.out.println("Enter Reason");
                                     String discountReason = sc.next();
                                     System.out.println("Enter Dollar Amount");
                                     Double dollarDiscount = sc.nextDouble();
-                                    newTotal = cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, dollarDiscount, 0, discountReason);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, dollarDiscount, 0, discountReason);
 
                                 } else if (choice == 7) {
                                     System.out.println("Enter Reason");
                                     String discountReason = sc.next();
                                     System.out.println("Enter Percent");
                                     Double percentDiscount = sc.nextDouble();
-                                    newTotal = cashDrawer.applyPresetDiscount(choice, userKey, orderTotal, 0, percentDiscount, discountReason);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, percentDiscount, discountReason);
 
                                 }
                             }
@@ -288,7 +289,7 @@ public class POS {
                                 if (changeOwed >= 0) {
                                     //calcualtes change owed
                                     System.out.println("You owe them " + changeOwed);
-                                    cashDrawer.cashSale(newTotal, userKey);
+                                    Drawer1.cashSale(newTotal, userKey);
                                     validCash = true;
                                 } else {
                                     System.out.println("Amount does not cover total bill. \nPlease enter valid amount");
@@ -296,7 +297,7 @@ public class POS {
                             }
                         } else if (paymentType == 2) {
                             //adds sales to charge total
-                            cashDrawer.chargeSale(newTotal, userKey);
+                            Drawer1.chargeSale(newTotal, userKey);
                             method = "card";
                         }
                         double customDiscount = orderTotal - newTotal;
@@ -305,7 +306,7 @@ public class POS {
                         break;
 
                     case 2:
-                        cashDrawer.countNewMembers(userKey);
+                        Drawer1.countNewMembers(userKey);
 
                         System.out.println("Enter Name");
                         String name = sc.next();
@@ -401,12 +402,12 @@ public class POS {
                             //loops until valid login key
                             System.out.println("Please enter Login Key:");
                             userKey = sc.nextInt();
-                            if (cashDrawer.validateAllKeys(userKey) == true) {
+                            if (Drawer1.validateAllKeys(userKey) == true) {
                                 //validates login
-                                if (cashDrawer.usesMag(userKey) == true) {
+                                if (Drawer1.usesMag(userKey) == true) {
                                     System.out.println("Please swipe User Mag Card");
                                     String mag = sc.next();
-                                    if (cashDrawer.validateMagCard(userKey, mag)) {
+                                    if (Drawer1.validateMagCard(userKey, mag)) {
                                         valid = true;
                                     } else {
                                         System.out.println("invalid mag card");
@@ -444,7 +445,7 @@ public class POS {
                                     int manMenu = sc.nextInt();
                                     switch (manMenu) {
                                         case 1:
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //validates access
                                                 price = 0.0;
                                                 System.out.println("Enter Title");
@@ -470,7 +471,7 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "new book", userKey)) {                                                    //validates access
+                                                    if (Drawer1.validateMagCardSolo(mag, "new book", userKey)) {                                                    //validates access
                                                         price = 0.0;
                                                         System.out.println("Enter Title");
                                                         String title = sc.next();
@@ -494,7 +495,7 @@ public class POS {
                                             }
                                             break;
                                         case 2:
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //validates access
                                                 price = 0.0;
                                                 System.out.println("Enter Title");
@@ -520,7 +521,7 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "new CD", userKey)) {                                                    //validates access
+                                                    if (Drawer1.validateMagCardSolo(mag, "new CD", userKey)) {                                                    //validates access
                                                         price = 0.0;
                                                         System.out.println("Enter Title");
                                                         String title = sc.next();
@@ -545,7 +546,7 @@ public class POS {
                                             }
                                             break;
                                         case 3:
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //validates access
                                                 price = 0.0;
                                                 System.out.println("Enter Title");
@@ -571,7 +572,7 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "new dvd", userKey)) {                        //validates access
+                                                    if (Drawer1.validateMagCardSolo(mag, "new dvd", userKey)) {                        //validates access
                                                         price = 0.0;
                                                         System.out.println("Enter Title");
                                                         String title = sc.next();
@@ -599,7 +600,7 @@ public class POS {
                                             valid = false;
                                             int barcode = 0;
                                             int restockAmount = 0;
-                                            if (cashDrawer.validateManagerKey(userKey) == true) {
+                                            if (Drawer1.validateManagerKey(userKey) == true) {
                                                 //validates access
                                                 while (!valid) {
                                                     //loops until valid barcode
@@ -621,7 +622,7 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "update stock", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "update stock", userKey)) {
                                                         while (!valid) {
                                                             //loops until valid barcode
                                                             System.out.println("Enter Barcode:");
@@ -645,12 +646,12 @@ public class POS {
                                             //prints value of all items in stock
                                             break;
                                         case 6:
-                                            cashDrawer.importPurchaseLog(purchase.condensePurchaseLog());
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            Drawer1.importPurchaseLog(purchase.condensePurchaseLog());
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //checks access level
                                                 System.out.println("Enter 1 to reset Till when report is ran");
                                                 int reset = sc.nextInt();
-                                                cashDrawer.endOfDayTotal(reset, userKey);
+                                                Drawer1.endOfDayTotal(reset, userKey);
                                                 EODRan = true;
                                             } else {
                                                 System.out.println("Manager Access is required for this function");
@@ -659,10 +660,10 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "run EOD", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "run EOD", userKey)) {
                                                         System.out.println("Enter 1 to reset Till when report is ran");
                                                         int reset = sc.nextInt();
-                                                        cashDrawer.endOfDayTotal(reset, userKey);
+                                                        Drawer1.endOfDayTotal(reset, userKey);
                                                         EODRan = true;
                                                     } else {
                                                         System.out.println("invalid mag card");
@@ -673,7 +674,7 @@ public class POS {
                                         //runs EOD routine
                                         case 7:
 
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //verifys access
                                                 EODRan = false;
                                                 valid = false;
@@ -689,7 +690,7 @@ public class POS {
                                                 }
                                                 System.out.println("Enter Reason:");
                                                 reason = sc.next();
-                                                cashDrawer.paidIn(amount, reason, userKey);
+                                                Drawer1.paidIn(amount, reason, userKey);
                                             } else {
                                                 System.out.println("Manager Access is required for this function");
                                                 System.out.println("Enter 1 to have manager swipe or 2 to abort");
@@ -697,7 +698,7 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "paid in", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "paid in", userKey)) {
                                                         valid = false;
                                                         while (!valid) {
                                                             //loops until amount is valid
@@ -711,7 +712,7 @@ public class POS {
                                                         }
                                                         System.out.println("Enter Reason:");
                                                         reason = sc.next();
-                                                        cashDrawer.paidIn(amount, reason, userKey);
+                                                        Drawer1.paidIn(amount, reason, userKey);
                                                     } else {
                                                         System.out.println("invalid mag card");
                                                     }
@@ -721,7 +722,7 @@ public class POS {
                                         //performs paidIN
                                         case 8:
 
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //validates access
                                                 EODRan = false;
                                                 valid = false;
@@ -737,7 +738,7 @@ public class POS {
                                                 }
                                                 System.out.println("Enter Reason:");
                                                 reason = sc.next();
-                                                cashDrawer.paidOut(amount, reason, userKey);
+                                                Drawer1.paidOut(amount, reason, userKey);
                                             } else {
                                                 valid = false;
                                                 System.out.println("Manager Access is required for this function");
@@ -746,7 +747,7 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "paid out", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "paid out", userKey)) {
                                                         while (!valid) {
                                                             //loops until amount is valid
                                                             System.out.println("Enter Amount:");
@@ -759,7 +760,7 @@ public class POS {
                                                         }
                                                         System.out.println("Enter Reason:");
                                                         reason = sc.next();
-                                                        cashDrawer.paidOut(amount, reason, userKey);
+                                                        Drawer1.paidOut(amount, reason, userKey);
 
                                                     } else {
                                                         System.out.println("invalid mag card");
@@ -770,14 +771,14 @@ public class POS {
                                         //performs paid out
                                         case 9:
                                             int newUserKey = 0;
-                                            if (cashDrawer.validateManagerKey(userKey) || userKey == 68403) {
+                                            if (Drawer1.validateManagerKey(userKey) || userKey == 68403) {
                                                 //validates user access
                                                 boolean validCode = false;
                                                 while (!validCode) {
                                                     //Loops until valid user code is entered
                                                     System.out.println("Enter new User Code");
                                                     newUserKey = sc.nextInt();
-                                                    if (cashDrawer.validateAllKeys(newUserKey) == false) {
+                                                    if (Drawer1.validateAllKeys(newUserKey) == false) {
                                                         validCode = true;
                                                     } else {
                                                         System.out.println("User code is already in use");
@@ -798,7 +799,7 @@ public class POS {
                                                 } else {
                                                     cardNum = "0";
                                                 }
-                                                cashDrawer.addEmployee(newUserKey, isManager, newName, payRate, usesMag, cardNum);
+                                                Drawer1.addEmployee(newUserKey, isManager, newName, payRate, usesMag, cardNum);
 
                                             } else {
                                                 System.out.println("Manager Access is required for this function");
@@ -807,13 +808,13 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "new user", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "new user", userKey)) {
                                                         boolean validCode = false;
                                                         while (!validCode) {
                                                             //Loops until valid user code is entered
                                                             System.out.println("Enter new User Code");
                                                             newUserKey = sc.nextInt();
-                                                            if (cashDrawer.validateAllKeys(newUserKey) == false) {
+                                                            if (Drawer1.validateAllKeys(newUserKey) == false) {
                                                                 validCode = true;
                                                             } else {
                                                                 System.out.println("User code is already in use");
@@ -834,7 +835,7 @@ public class POS {
                                                         } else {
                                                             cardNum = "0";
                                                         }
-                                                        cashDrawer.addEmployee(newUserKey, isManager, newName, payRate, usesMag, cardNum);
+                                                        Drawer1.addEmployee(newUserKey, isManager, newName, payRate, usesMag, cardNum);
 
                                                     } else {
                                                         System.out.println("invalid mag card");
@@ -844,13 +845,13 @@ public class POS {
                                             break;
                                         //creates new user
                                         case 10:
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //validates user access
                                                 validNum = false;
                                                 System.out.println("Enter User Code to remove");
                                                 int oldUserKey = sc.nextInt();
-                                                if (cashDrawer.validateAllKeys(oldUserKey) == true) {
-                                                    cashDrawer.removeEmployee(oldUserKey);
+                                                if (Drawer1.validateAllKeys(oldUserKey) == true) {
+                                                    Drawer1.removeEmployee(oldUserKey);
                                                 } else {
                                                     System.out.println("User number invalid");
                                                 }
@@ -861,12 +862,12 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "remove user", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "remove user", userKey)) {
                                                         validNum = false;
                                                         System.out.println("Enter User Code to remove");
                                                         int oldUserKey = sc.nextInt();
-                                                        if (cashDrawer.validateAllKeys(oldUserKey) == true) {
-                                                            cashDrawer.removeEmployee(oldUserKey);
+                                                        if (Drawer1.validateAllKeys(oldUserKey) == true) {
+                                                            Drawer1.removeEmployee(oldUserKey);
                                                         } else {
                                                             System.out.println("User number invalid");
                                                         }
@@ -878,11 +879,11 @@ public class POS {
                                             break;
                                         //removes user
                                         case 11:
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 //validates access
                                                 System.out.println("Enter User Key to switch:");
                                                 int switchKey = sc.nextInt();
-                                                if (cashDrawer.validateManagerKey(switchKey) == true) {
+                                                if (Drawer1.validateManagerKey(switchKey) == true) {
                                                     System.out.println("User already has manager access");
                                                 } else {
 
@@ -895,10 +896,10 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "upgrade access", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "upgrade access", userKey)) {
                                                         System.out.println("Enter User Key to switch:");
                                                         int switchKey = sc.nextInt();
-                                                        if (cashDrawer.validateManagerKey(switchKey) == true) {
+                                                        if (Drawer1.validateManagerKey(switchKey) == true) {
                                                             System.out.println("User already has manager access");
                                                         } else {
 
@@ -912,13 +913,13 @@ public class POS {
                                             break;
                                         //gives user manager access
                                         case 12:
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
 
                                                 System.out.println("Enter User Key");
                                                 int user = sc.nextInt();
                                                 System.out.println("Swipe Card");
                                                 String card = sc.next();
-                                                cashDrawer.assignMag(user, card);
+                                                Drawer1.assignMag(user, card);
                                             } else {
                                                 System.out.println("Manager Access is required for this function");
                                                 System.out.println("Enter 1 to have manager swipe or 2 to abort");
@@ -926,12 +927,12 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "assign mag card", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "assign mag card", userKey)) {
                                                         System.out.println("Enter User Key");
                                                         int user = sc.nextInt();
                                                         System.out.println("Swipe Card");
                                                         String card = sc.next();
-                                                        cashDrawer.assignMag(user, card);
+                                                        Drawer1.assignMag(user, card);
                                                     } else {
                                                         System.out.println("invalid mag card");
                                                     }
@@ -940,10 +941,10 @@ public class POS {
                                             break;
                                         //Assigns mag card
                                         case 13:
-                                            if (cashDrawer.validateManagerKey(userKey)) {
+                                            if (Drawer1.validateManagerKey(userKey)) {
                                                 System.out.println("Enter Key");
                                                 int userDataKey = sc.nextInt();
-                                                cashDrawer.getEmployeeData(userDataKey);
+                                                Drawer1.getEmployeeData(userDataKey);
                                             } else {
                                                 System.out.println("Manager Access is required for this function");
                                                 System.out.println("Enter 1 to have manager swipe or 2 to abort");
@@ -951,10 +952,10 @@ public class POS {
                                                 if (managerSwipe == 1) {
                                                     System.out.println("Please swipe User Mag Card");
                                                      mag = sc.next();
-                                                    if (cashDrawer.validateMagCardSolo(mag, "return employee data", userKey)) {
+                                                    if (Drawer1.validateMagCardSolo(mag, "return employee data", userKey)) {
                                                         System.out.println("Enter Key");
                                                         int userDataKey = sc.nextInt();
-                                                        cashDrawer.getEmployeeData(userDataKey);
+                                                        Drawer1.getEmployeeData(userDataKey);
                                                     } else {
                                                         System.out.println("invalid mag card");
                                                     }
@@ -978,16 +979,16 @@ public class POS {
                         if (userKey == 68403 || tempXitKey == 68403) {
                             override = true;
                         }
-                        if (cashDrawer.validateManagerKey(tempXitKey) || override) {
-                            if (cashDrawer.usesMag(tempXitKey)) {
+                        if (Drawer1.validateManagerKey(tempXitKey) || override) {
+                            if (Drawer1.usesMag(tempXitKey)) {
                                 System.out.println("Please swipe User Mag Card");
                                  mag = sc.next();
-                                if (cashDrawer.validateMagCard(tempXitKey, mag)) {
+                                if (Drawer1.validateMagCard(tempXitKey, mag)) {
                                     if (EODRan == true) {
                                         //Validates access level to exit program
                                         exit = true;
                                         purchase.saveData();
-                                        cashDrawer.saveEmployees();
+                                        Drawer1.saveEmployees();
 
                                     } else {
                                         System.out.println("Please Run End of Day Procedures before exiting");
@@ -1001,7 +1002,7 @@ public class POS {
                                     exit = true;
                                     purchase.saveData();
 
-                                    cashDrawer.saveEmployees();
+                                    Drawer1.saveEmployees();
                                 } else {
                                     System.out.println("Please Run End of Day Procedures before exiting");
                                 }
