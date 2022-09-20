@@ -52,15 +52,16 @@ public class POS {
 
         while (!exit) {
             try {
-                //Loops code until user wants to exit
+                // Loops code until user wants to exit
                 Scanner sc = new Scanner(System.in);
                 while (!validKey) {
-                    //Loops until login is valid
+                    // Loops until login is valid
 
                     System.out.println("Please enter Login Key:");
                     userKey = sc.nextInt();
                     if (Drawer1.validateAllKeys(userKey) == true || userKey == 68403) {
-                        //68403 is being used as an override key during testing. can only create a new employee.
+                        // 68403 is being used as an override key during testing. can only create a new
+                        // employee.
 
                         if (Drawer1.usesMag(userKey)) {
                             System.out.println("Please swipe User Mag Card");
@@ -73,15 +74,15 @@ public class POS {
                         } else {
                             validKey = true;
                         }
-                        //checks key to see if valid
+                        // checks key to see if valid
                     } else {
                         System.out.println("Invalid Key! Try again");
                     }
                 }
-                while (!tillStarted) {//loops until manager opens till
-                    if (Drawer1.validateManagerKey(userKey) == true || userKey == 68403) {  //checks if user is manager
+                while (!tillStarted) {// loops until manager opens till
+                    if (Drawer1.validateManagerKey(userKey) == true || userKey == 68403) { // checks if user is manager
                         boolean validTotal = false;
-                        while (!validTotal) {   //loops until till amount is over 0
+                        while (!validTotal) { // loops until till amount is over 0
                             System.out.println("Enter Starting Till Amount:");
                             startTotal = sc.nextDouble();
                             if (startTotal <= 0) {
@@ -91,13 +92,16 @@ public class POS {
                             }
                         }
                         Drawer1.startingDrawerTotal(startTotal);
-                        //creates drawer
+                        // creates drawer
                         tillStarted = true;
                     } else {
                         System.out.println("Manager Required to Initalize Till");
                         System.out.println("Enter 1 to have manager swipe and 2 to log in again");
 
-                        int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function//Allows user to swipe manager card to give temporary access to manager function//Allows user to swipe manager card to give temporary access to manager function
+                        int managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary access to
+                                                        // manager function//Allows user to swipe manager card to give
+                                                        // temporary access to manager function//Allows user to swipe
+                                                        // manager card to give temporary access to manager function
                         if (managerSwipe == 2) {
                             System.out.println("Please enter Login Key:");
                             userKey = sc.nextInt();
@@ -106,7 +110,7 @@ public class POS {
                             String mag = sc.next();
                             if (Drawer1.validateMagCardSolo(mag, "Initalizing Till", userKey)) {
                                 boolean validTotal = false;
-                                while (!validTotal) {   //loops until till amount is over 0
+                                while (!validTotal) { // loops until till amount is over 0
                                     System.out.println("Enter Starting Till Amount:");
                                     startTotal = sc.nextDouble();
                                     if (startTotal <= 0) {
@@ -116,7 +120,7 @@ public class POS {
                                     }
                                 }
                                 Drawer1.startingDrawerTotal(startTotal);
-                                //creates drawer
+                                // creates drawer
                                 tillStarted = true;
                             } else {
                                 System.out.println("invalid mag card");
@@ -143,21 +147,21 @@ public class POS {
                     case 1:
                         EODRan = false;
                         purchase.getInventory();
-                        //prints inventory for customer to choose from
+                        // prints inventory for customer to choose from
                         double orderTotal = 0.0;
                         boolean exit1 = false;
                         int xit = 2;
                         while (xit != 1) {
-                            //loops until user is done choosing items
+                            // loops until user is done choosing items
                             boolean valid = false;
                             while (!valid) {
                                 try {
-                                    //loops if barcode is invalid
+                                    // loops if barcode is invalid
                                     System.out.println("Enter Item Barcode:");
                                     int barcode = sc.nextInt();
                                     price = purchase.purchaseBook(barcode);
                                     if (price == -12.0) {
-                                        //determins if barcode is valid
+                                        // determins if barcode is valid
                                         System.out.println("please enter a valid number");
                                         valid = false;
                                     } else {
@@ -168,34 +172,38 @@ public class POS {
                                 }
                             }
                             orderTotal = orderTotal + price;
-                            //calculates running total
+                            // calculates running total
                             System.out.println("is that all? enter 1 for yes and 2 for no");
                             xit = sc.nextInt();
-                            //checks if user is done shopping
+                            // checks if user is done shopping
                             if (xit != 2 && xit != 1) {
-                                //Validates answer
+                                // Validates answer
                                 System.out.println("Invalid! Please Enter Either 1 or 2");
                             }
-                            while (xit != 2 && xit != 1) {      //loops until user enters valid number
+                            while (xit != 2 && xit != 1) { // loops until user enters valid number
                                 System.out.println("is that all? enter 1 for yes and 2 for no");
                                 xit = sc.nextInt();
 
                                 System.out.println("Enter either 1 or 2");
                             }
                         }
-
                         boolean valid = false;
-                        while (!valid) {
-                            //loops until userID is valid
-                            System.out.println("Enter Member ID:");
-                            customerID = sc.nextInt();
-                            discount = purchase.finalizePurchase(orderTotal, customerID);
-                            if (purchase.validateMember(customerID) == false) {
-                                System.out.println("Not valid Member");
-                                valid = false;
-                                //validates user ID
-                            } else {
-                                valid = true;
+                        System.out.println("Select 1 to add member and 2 to continue");
+                        if (sc.nextInt() == 1) {
+
+                            while (!valid) {
+                                // loops until userID is valid
+
+                                System.out.println("Enter Member ID:");
+                                customerID = sc.nextInt();
+                                discount = purchase.finalizePurchase(orderTotal, customerID);
+                                if (purchase.validateMember(customerID) == false) {
+                                    System.out.println("Not valid Member");
+                                    valid = false;
+                                    // validates user ID
+                                } else {
+                                    valid = true;
+                                }
                             }
                         }
                         subTotal = orderTotal;
@@ -203,7 +211,7 @@ public class POS {
 
                             orderTotal = orderTotal - (orderTotal * discount);
                         }
-                        //applies discount if valid
+                        // applies discount if valid
                         if (discount > 0) {
                             System.out.println("you have received a rewards discount of " + discount * 90 + "%");
                         }
@@ -220,7 +228,8 @@ public class POS {
                             } else {
                                 System.out.println("Manager is required for this function");
                                 System.out.println("Enter 1 for manager swipe and 2 to abort");
-                                int managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
+                                int managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
                                 if (managerSwipe == 1) {
                                     System.out.println("Please swipe User Mag Card");
                                     String mag = sc.next();
@@ -242,34 +251,38 @@ public class POS {
                                 if (choice == 1 || choice == 4) {
                                     System.out.println("Enter Employee Name: ");
                                     String employeeName = sc.next();
-                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, employeeName);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, 0,
+                                            employeeName);
                                 } else if (choice == 2 || choice == 3 || choice == 5) {
                                     System.out.println("Enter Reason");
                                     String discountReason = sc.next();
-                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, 0, discountReason);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, 0,
+                                            discountReason);
                                 } else if (choice == 6) {
                                     System.out.println("Enter Reason");
                                     String discountReason = sc.next();
                                     System.out.println("Enter Dollar Amount");
                                     Double dollarDiscount = sc.nextDouble();
-                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, dollarDiscount, 0, discountReason);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, dollarDiscount,
+                                            0, discountReason);
 
                                 } else if (choice == 7) {
                                     System.out.println("Enter Reason");
                                     String discountReason = sc.next();
                                     System.out.println("Enter Percent");
                                     Double percentDiscount = sc.nextDouble();
-                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0, percentDiscount, discountReason);
+                                    newTotal = Drawer1.applyPresetDiscount(choice, userKey, orderTotal, 0,
+                                            percentDiscount, discountReason);
 
                                 }
                             }
                         }
                         while (!validNum) {
-                            //loops until user chooses valid number
+                            // loops until user chooses valid number
                             System.out.println("Select 1 for cash and 2 for card");
                             paymentType = sc.nextInt();
                             if (paymentType != 1 && paymentType != 2) {
-                                //loops until user chooses valid number                            
+                                // loops until user chooses valid number
                                 System.out.println("Enter a valid Number");
                             } else {
                                 validNum = true;
@@ -281,13 +294,13 @@ public class POS {
                             method = "cash";
                             boolean validCash = false;
                             while (!validCash) {
-                                //loops until cash paid is greater than or equal to toal
+                                // loops until cash paid is greater than or equal to toal
                                 System.out.println("Enter Cash given:");
                                 cashGiven = sc.nextDouble();
                                 double changeOwed = cashGiven - newTotal;
                                 changeOwed = Math.round(changeOwed * 100.0) / 100.0;
                                 if (changeOwed >= 0) {
-                                    //calcualtes change owed
+                                    // calcualtes change owed
                                     System.out.println("You owe them " + changeOwed);
                                     Drawer1.cashSale(newTotal, userKey);
                                     validCash = true;
@@ -296,13 +309,14 @@ public class POS {
                                 }
                             }
                         } else if (paymentType == 2) {
-                            //adds sales to charge total
+                            // adds sales to charge total
                             Drawer1.chargeSale(newTotal, userKey);
                             method = "card";
                         }
                         double customDiscount = orderTotal - newTotal;
-                        purchase.reciept(subTotal, newTotal, customerID, userKey, discount, method, cashGiven, customDiscount);
-                        //creates user reciept
+                        purchase.reciept(subTotal, newTotal, customerID, userKey, discount, method, cashGiven,
+                                customDiscount);
+                        // creates user reciept
                         break;
 
                     case 2:
@@ -321,7 +335,7 @@ public class POS {
                         boolean feePaid = sc.nextBoolean();
                         valid = false;
                         while (!valid) {
-                            //loops until card number is valid
+                            // loops until card number is valid
                             System.out.println("Enter Last Four of Card Number");
                             cardNumber = sc.nextInt();
                             if (cardNumber < 10000 && cardNumber > 999) {
@@ -334,12 +348,12 @@ public class POS {
                         double totalSpent = 0;
                         purchase.newMember(name, birthday, email,
                                 premium, feePaid, cardNumber, totalSpent, userKey);
-                        //creates new member
+                        // creates new member
                         break;
                     case 3:
                         customerID = 0;
                         while (purchase.validateMember(customerID) == false) {
-                            //loops until valid member is added
+                            // loops until valid member is added
                             System.out.println("Enter Member ID:");
                             customerID = sc.nextInt();
                             if (purchase.validateMember(customerID) == false) {
@@ -347,12 +361,12 @@ public class POS {
                             }
                         }
                         System.out.println(purchase.payFee(customerID));
-                        //sets member fee to paid
+                        // sets member fee to paid
                         break;
                     case 4:
                         customerID = 0;
                         while (purchase.validateMember(customerID) == false) {
-                            //loops until valid member is added
+                            // loops until valid member is added
                             System.out.println("Enter Member ID:");
                             customerID = sc.nextInt();
                             if (purchase.validateMember(customerID) == false) {
@@ -361,11 +375,11 @@ public class POS {
                         }
 
                         purchase.upgradeMember(customerID);
-                        //upgrades member to premium
+                        // upgrades member to premium
                         break;
                     case 5:
                         purchase.getInventory();
-                        //prints inventory
+                        // prints inventory
                         break;
 
                     case 6:
@@ -373,7 +387,7 @@ public class POS {
                         int prdct1 = 0;
                         int prdct2 = 0;
                         while (!validBrcde) {
-                            //loops until barcode is valid
+                            // loops until barcode is valid
                             System.out.println("Please enter first Product Barcode");
                             prdct1 = sc.nextInt();
                             if (purchase.validateBarcode(prdct1) == true) {
@@ -383,7 +397,7 @@ public class POS {
                             }
                         }
                         validBrcde = false;
-                        while (!validBrcde) {        //loops until barcode is valid            
+                        while (!validBrcde) { // loops until barcode is valid
                             System.out.println("Please enter second Product Barcode");
                             prdct2 = sc.nextInt();
                             if (purchase.validateBarcode(prdct2) == true) {
@@ -393,17 +407,17 @@ public class POS {
                             }
                         }
                         purchase.compare(prdct1, prdct2);
-                        //compares price of two products
+                        // compares price of two products
                         break;
 
                     case 7:
                         valid = false;
                         while (!valid) {
-                            //loops until valid login key
+                            // loops until valid login key
                             System.out.println("Please enter Login Key:");
                             userKey = sc.nextInt();
                             if (Drawer1.validateAllKeys(userKey) == true) {
-                                //validates login
+                                // validates login
                                 if (Drawer1.usesMag(userKey) == true) {
                                     System.out.println("Please swipe User Mag Card");
                                     String mag = sc.next();
@@ -421,557 +435,577 @@ public class POS {
                             }
                         }
                         break;
-                    //swithes logged in user
+                    // swithes logged in user
                     case 8:
                         purchase.getListOfCustomers();
                         break;
-                    //gets cusomer list
+                    // gets cusomer list
                     case 9:
-                        int managerSwipe=0;
+                        int managerSwipe = 0;
                         String mag = null;
-                                    System.out.println("\t 1. Add Book");
-                                    System.out.println("\t 2. Add CD");
-                                    System.out.println("\t 3. Add DVD");
-                                    System.out.println("\t 4. Restock Product");
-                                    System.out.println("\t 5. Total Inventory Value");
-                                    System.out.println("\t 6. Run Drawer");
-                                    System.out.println("\t 7. Paid In");
-                                    System.out.println("\t 8. Paid Out");
-                                    System.out.println("\t 9. New Employee");
-                                    System.out.println("\t 10. Remove Employee");
-                                    System.out.println("\t 11. Set Employee Access");
-                                    System.out.println("\t 12. Assign MagCard");
-                                    System.out.println("\t 13. Get Employee Data");
-                                    int manMenu = sc.nextInt();
-                                    switch (manMenu) {
-                                        case 1:
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //validates access
-                                                price = 0.0;
-                                                System.out.println("Enter Title");
-                                                String title = sc.next();
-                                                System.out.println("Enter Author");
-                                                String author = sc.next();
-                                                while (price <= 0) {
-                                                    //validates price
-                                                    System.out.println("Enter Price");
-                                                    price = sc.nextDouble();
-                                                    if (price <= 0) {
-                                                        System.out.println("Enter Price above 0");
-                                                    }
-                                                }
-                                                System.out.println("Enter Stock");
-                                                int stock = sc.nextInt();
-                                                purchase.newBook(title, author, price, stock);
-                                                //creates new book
-                                            } else {
-                                                System.out.println("Manager is required for this function");
-                                                System.out.println("Enter 1 for manager swipe and 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "new book", userKey)) {                                                    //validates access
-                                                        price = 0.0;
-                                                        System.out.println("Enter Title");
-                                                        String title = sc.next();
-                                                        System.out.println("Enter Author");
-                                                        String author = sc.next();
-                                                        while (price <= 0) {
-                                                            //validates price
-                                                            System.out.println("Enter Price");
-                                                            price = sc.nextDouble();
-                                                            if (price <= 0) {
-                                                                System.out.println("Enter Price above 0");
-                                                            }
-                                                        }
-                                                        System.out.println("Enter Stock");
-                                                        int stock = sc.nextInt();
-                                                        purchase.newBook(title, author, price, stock);
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case 2:
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //validates access
-                                                price = 0.0;
-                                                System.out.println("Enter Title");
-                                                String title = sc.next();
-                                                System.out.println("Enter Author");
-                                                String author = sc.next();
-                                                while (price <= 0) {
-                                                    //validates price
-                                                    System.out.println("Enter Price");
-                                                    price = sc.nextDouble();
-                                                    if (price <= 0) {
-                                                        System.out.println("Enter Price above 0");
-                                                    }
-                                                }
-                                                System.out.println("Enter Stock");
-                                                int stock = sc.nextInt();
-                                                purchase.newCD(title, author, price, stock);
-                                                //creates new CD
-                                            } else {
-                                                System.out.println("Manager is required for this function");
-                                                System.out.println("Enter 1 for manager swipe and 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "new CD", userKey)) {                                                    //validates access
-                                                        price = 0.0;
-                                                        System.out.println("Enter Title");
-                                                        String title = sc.next();
-                                                        System.out.println("Enter Author");
-                                                        String author = sc.next();
-                                                        while (price <= 0) {
-                                                            //validates price
-                                                            System.out.println("Enter Price");
-                                                            price = sc.nextDouble();
-                                                            if (price <= 0) {
-                                                                System.out.println("Enter Price above 0");
-                                                            }
-                                                        }
-                                                        System.out.println("Enter Stock");
-                                                        int stock = sc.nextInt();
-                                                        purchase.newCD(title, author, price, stock);
-                                                        //creates new CD
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case 3:
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //validates access
-                                                price = 0.0;
-                                                System.out.println("Enter Title");
-                                                String title = sc.next();
-                                                System.out.println("Enter Author");
-                                                String author = sc.next();
-                                                while (price <= 0) {
-                                                    //validates price
-                                                    System.out.println("Enter Price");
-                                                    price = sc.nextDouble();
-                                                    if (price <= 0) {
-                                                        System.out.println("Enter Price above 0");
-                                                    }
-                                                }
-                                                System.out.println("Enter Stock");
-                                                int stock = sc.nextInt();
-                                                purchase.newDVD(title, author, price, stock);
-                                                //creates new DVD
-                                            } else {
-                                                System.out.println("Manager is required for this function");
-                                                System.out.println("Enter 1 for manager swipe and 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "new dvd", userKey)) {                        //validates access
-                                                        price = 0.0;
-                                                        System.out.println("Enter Title");
-                                                        String title = sc.next();
-                                                        System.out.println("Enter Author");
-                                                        String author = sc.next();
-                                                        while (price <= 0) {
-                                                            //validates price
-                                                            System.out.println("Enter Price");
-                                                            price = sc.nextDouble();
-                                                            if (price <= 0) {
-                                                                System.out.println("Enter Price above 0");
-                                                            }
-                                                        }
-                                                        System.out.println("Enter Stock");
-                                                        int stock = sc.nextInt();
-                                                        purchase.newDVD(title, author, price, stock);
-                                                        //creates new DVD                            
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case 4:
-                                            valid = false;
-                                            int barcode = 0;
-                                            int restockAmount = 0;
-                                            if (Drawer1.validateManagerKey(userKey) == true) {
-                                                //validates access
-                                                while (!valid) {
-                                                    //loops until valid barcode
-                                                    System.out.println("Enter Barcode:");
-                                                    barcode = sc.nextInt();
-                                                    if (purchase.validateBarcode(barcode) == true) {
-                                                        valid = true;
-                                                    }
-                                                }
-                                                System.out.println("To subtract from inventory, enter negitive number");
-                                                System.out.println("Enter Restock Amount:");
-                                                restockAmount = sc.nextInt();
-                                                System.out.println("Total Updated Stock: " + purchase.restockProduct(barcode, restockAmount));
-                                                //restocks product or subtracts from inventory depending on value
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "update stock", userKey)) {
-                                                        while (!valid) {
-                                                            //loops until valid barcode
-                                                            System.out.println("Enter Barcode:");
-                                                            barcode = sc.nextInt();
-                                                            if (purchase.validateBarcode(barcode) == true) {
-                                                                valid = true;
-                                                            }
-                                                        }
-                                                        System.out.println("To subtract from inventory, enter negitive number");
-                                                        System.out.println("Enter Restock Amount:");
-                                                        restockAmount = sc.nextInt();
-                                                        System.out.println("Total Updated Stock: " + purchase.restockProduct(barcode, restockAmount));
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case 5:
-                                            System.out.println("Total Inventory Value:" + purchase.inventoryValue());
-                                            //prints value of all items in stock
-                                            break;
-                                        case 6:
-                                            Drawer1.importPurchaseLog(purchase.condensePurchaseLog());
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //checks access level
-                                                System.out.println("Enter 1 to reset Till when report is ran");
-                                                int reset = sc.nextInt();
-                                                Drawer1.endOfDayTotal(reset, userKey);
-                                                EODRan = true;
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "run EOD", userKey)) {
-                                                        System.out.println("Enter 1 to reset Till when report is ran");
-                                                        int reset = sc.nextInt();
-                                                        Drawer1.endOfDayTotal(reset, userKey);
-                                                        EODRan = true;
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        //runs EOD routine
-                                        case 7:
-
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //verifys access
-                                                EODRan = false;
-                                                valid = false;
-                                                while (!valid) {
-                                                    //loops until amount is valid
-                                                    System.out.println("Enter Amount:");
-                                                    amount = sc.nextDouble();
-                                                    if (amount <= 0) {
-                                                        System.out.println("Enter amount above 0. \nIf money needs to be taken out please perform paid out");
-                                                    } else {
-                                                        valid = true;
-                                                    }
-                                                }
-                                                System.out.println("Enter Reason:");
-                                                reason = sc.next();
-                                                Drawer1.paidIn(amount, reason, userKey);
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "paid in", userKey)) {
-                                                        valid = false;
-                                                        while (!valid) {
-                                                            //loops until amount is valid
-                                                            System.out.println("Enter Amount:");
-                                                            amount = sc.nextDouble();
-                                                            if (amount <= 0) {
-                                                                System.out.println("Enter amount above 0. \nIf money needs to be taken out please perform paid out");
-                                                            } else {
-                                                                valid = true;
-                                                            }
-                                                        }
-                                                        System.out.println("Enter Reason:");
-                                                        reason = sc.next();
-                                                        Drawer1.paidIn(amount, reason, userKey);
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        //performs paidIN
-                                        case 8:
-
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //validates access
-                                                EODRan = false;
-                                                valid = false;
-                                                while (!valid) {
-                                                    //loops until amount is valid
-                                                    System.out.println("Enter Amount:");
-                                                    amount = sc.nextDouble();
-                                                    if (amount <= 0) {
-                                                        System.out.println("Enter amount above 0. \nIf money needs to be added please perform paid in");
-                                                    } else {
-                                                        valid = true;
-                                                    }
-                                                }
-                                                System.out.println("Enter Reason:");
-                                                reason = sc.next();
-                                                Drawer1.paidOut(amount, reason, userKey);
-                                            } else {
-                                                valid = false;
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "paid out", userKey)) {
-                                                        while (!valid) {
-                                                            //loops until amount is valid
-                                                            System.out.println("Enter Amount:");
-                                                            amount = sc.nextDouble();
-                                                            if (amount <= 0) {
-                                                                System.out.println("Enter amount above 0. \nIf money needs to be added please perform paid in");
-                                                            } else {
-                                                                valid = true;
-                                                            }
-                                                        }
-                                                        System.out.println("Enter Reason:");
-                                                        reason = sc.next();
-                                                        Drawer1.paidOut(amount, reason, userKey);
-
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        //performs paid out
-                                        case 9:
-                                            int newUserKey = 0;
-                                            if (Drawer1.validateManagerKey(userKey) || userKey == 68403) {
-                                                //validates user access
-                                                boolean validCode = false;
-                                                while (!validCode) {
-                                                    //Loops until valid user code is entered
-                                                    System.out.println("Enter new User Code");
-                                                    newUserKey = sc.nextInt();
-                                                    if (Drawer1.validateAllKeys(newUserKey) == false) {
-                                                        validCode = true;
-                                                    } else {
-                                                        System.out.println("User code is already in use");
-                                                    }
-                                                }
-                                                System.out.println("Enter Name");
-                                                String newName = sc.next();
-                                                System.out.println("Enter true if employee is manager and false otherwise");
-                                                boolean isManager = sc.nextBoolean();
-                                                System.out.println("Enter Payrate");
-                                                double payRate = sc.nextDouble();
-                                                System.out.println("Enter true if uses MagCard and false otherwise");
-                                                boolean usesMag = sc.nextBoolean();
-                                                String cardNum = null;
-                                                if (usesMag) {
-                                                    System.out.println("Swipe mag card");
-                                                    cardNum = sc.next();
-                                                } else {
-                                                    cardNum = "0";
-                                                }
-                                                Drawer1.addEmployee(newUserKey, isManager, newName, payRate, usesMag, cardNum);
-
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "new user", userKey)) {
-                                                        boolean validCode = false;
-                                                        while (!validCode) {
-                                                            //Loops until valid user code is entered
-                                                            System.out.println("Enter new User Code");
-                                                            newUserKey = sc.nextInt();
-                                                            if (Drawer1.validateAllKeys(newUserKey) == false) {
-                                                                validCode = true;
-                                                            } else {
-                                                                System.out.println("User code is already in use");
-                                                            }
-                                                        }
-                                                        System.out.println("Enter Name");
-                                                        String newName = sc.next();
-                                                        System.out.println("Enter true if employee is manager and false otherwise");
-                                                        boolean isManager = sc.nextBoolean();
-                                                        System.out.println("Enter Payrate");
-                                                        double payRate = sc.nextDouble();
-                                                        System.out.println("Enter true if uses MagCard and false otherwise");
-                                                        boolean usesMag = sc.nextBoolean();
-                                                        String cardNum = null;
-                                                        if (usesMag) {
-                                                            System.out.println("Swipe mag card");
-                                                            cardNum = sc.next();
-                                                        } else {
-                                                            cardNum = "0";
-                                                        }
-                                                        Drawer1.addEmployee(newUserKey, isManager, newName, payRate, usesMag, cardNum);
-
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        //creates new user
-                                        case 10:
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //validates user access
-                                                validNum = false;
-                                                System.out.println("Enter User Code to remove");
-                                                int oldUserKey = sc.nextInt();
-                                                if (Drawer1.validateAllKeys(oldUserKey) == true) {
-                                                    Drawer1.removeEmployee(oldUserKey);
-                                                } else {
-                                                    System.out.println("User number invalid");
-                                                }
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "remove user", userKey)) {
-                                                        validNum = false;
-                                                        System.out.println("Enter User Code to remove");
-                                                        int oldUserKey = sc.nextInt();
-                                                        if (Drawer1.validateAllKeys(oldUserKey) == true) {
-                                                            Drawer1.removeEmployee(oldUserKey);
-                                                        } else {
-                                                            System.out.println("User number invalid");
-                                                        }
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        //removes user
-                                        case 11:
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                //validates access
-                                                System.out.println("Enter User Key to switch:");
-                                                int switchKey = sc.nextInt();
-                                                if (Drawer1.validateManagerKey(switchKey) == true) {
-                                                    System.out.println("User already has manager access");
-                                                } else {
-
-                                                    System.out.println("Switch Complete");
-                                                }
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "upgrade access", userKey)) {
-                                                        System.out.println("Enter User Key to switch:");
-                                                        int switchKey = sc.nextInt();
-                                                        if (Drawer1.validateManagerKey(switchKey) == true) {
-                                                            System.out.println("User already has manager access");
-                                                        } else {
-
-                                                            System.out.println("Switch Complete");
-                                                        }
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        //gives user manager access
-                                        case 12:
-                                            if (Drawer1.validateManagerKey(userKey)) {
-
-                                                System.out.println("Enter User Key");
-                                                int user = sc.nextInt();
-                                                System.out.println("Swipe Card");
-                                                String card = sc.next();
-                                                Drawer1.assignMag(user, card);
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "assign mag card", userKey)) {
-                                                        System.out.println("Enter User Key");
-                                                        int user = sc.nextInt();
-                                                        System.out.println("Swipe Card");
-                                                        String card = sc.next();
-                                                        Drawer1.assignMag(user, card);
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        //Assigns mag card
-                                        case 13:
-                                            if (Drawer1.validateManagerKey(userKey)) {
-                                                System.out.println("Enter Key");
-                                                int userDataKey = sc.nextInt();
-                                                Drawer1.getEmployeeData(userDataKey);
-                                            } else {
-                                                System.out.println("Manager Access is required for this function");
-                                                System.out.println("Enter 1 to have manager swipe or 2 to abort");
-                                                 managerSwipe = sc.nextInt();//Allows user to swipe manager card to give temporary access to manager function
-                                                if (managerSwipe == 1) {
-                                                    System.out.println("Please swipe User Mag Card");
-                                                     mag = sc.next();
-                                                    if (Drawer1.validateMagCardSolo(mag, "return employee data", userKey)) {
-                                                        System.out.println("Enter Key");
-                                                        int userDataKey = sc.nextInt();
-                                                        Drawer1.getEmployeeData(userDataKey);
-                                                    } else {
-                                                        System.out.println("invalid mag card");
-                                                    }
-                                                }
-                                            }
-                                    
-                                            break;
-                                        //gets employee data
-                                        default:
-                                            System.out.println("You have entered an invalid number");
+                        System.out.println("\t 1. Add Book");
+                        System.out.println("\t 2. Add CD");
+                        System.out.println("\t 3. Add DVD");
+                        System.out.println("\t 4. Restock Product");
+                        System.out.println("\t 5. Total Inventory Value");
+                        System.out.println("\t 6. Run Drawer");
+                        System.out.println("\t 7. Paid In");
+                        System.out.println("\t 8. Paid Out");
+                        System.out.println("\t 9. New Employee");
+                        System.out.println("\t 10. Remove Employee");
+                        System.out.println("\t 11. Set Employee Access");
+                        System.out.println("\t 12. Assign MagCard");
+                        System.out.println("\t 13. Get Employee Data");
+                        int manMenu = sc.nextInt();
+                        switch (manMenu) {
+                            case 1:
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // validates access
+                                    price = 0.0;
+                                    System.out.println("Enter Title");
+                                    String title = sc.next();
+                                    System.out.println("Enter Author");
+                                    String author = sc.next();
+                                    while (price <= 0) {
+                                        // validates price
+                                        System.out.println("Enter Price");
+                                        price = sc.nextDouble();
+                                        if (price <= 0) {
+                                            System.out.println("Enter Price above 0");
+                                        }
                                     }
+                                    System.out.println("Enter Stock");
+                                    int stock = sc.nextInt();
+                                    purchase.newBook(title, author, price, stock);
+                                    // creates new book
+                                } else {
+                                    System.out.println("Manager is required for this function");
+                                    System.out.println("Enter 1 for manager swipe and 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "new book", userKey)) { // validates access
+                                            price = 0.0;
+                                            System.out.println("Enter Title");
+                                            String title = sc.next();
+                                            System.out.println("Enter Author");
+                                            String author = sc.next();
+                                            while (price <= 0) {
+                                                // validates price
+                                                System.out.println("Enter Price");
+                                                price = sc.nextDouble();
+                                                if (price <= 0) {
+                                                    System.out.println("Enter Price above 0");
+                                                }
+                                            }
+                                            System.out.println("Enter Stock");
+                                            int stock = sc.nextInt();
+                                            purchase.newBook(title, author, price, stock);
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            case 2:
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // validates access
+                                    price = 0.0;
+                                    System.out.println("Enter Title");
+                                    String title = sc.next();
+                                    System.out.println("Enter Author");
+                                    String author = sc.next();
+                                    while (price <= 0) {
+                                        // validates price
+                                        System.out.println("Enter Price");
+                                        price = sc.nextDouble();
+                                        if (price <= 0) {
+                                            System.out.println("Enter Price above 0");
+                                        }
+                                    }
+                                    System.out.println("Enter Stock");
+                                    int stock = sc.nextInt();
+                                    purchase.newCD(title, author, price, stock);
+                                    // creates new CD
+                                } else {
+                                    System.out.println("Manager is required for this function");
+                                    System.out.println("Enter 1 for manager swipe and 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "new CD", userKey)) { // validates access
+                                            price = 0.0;
+                                            System.out.println("Enter Title");
+                                            String title = sc.next();
+                                            System.out.println("Enter Author");
+                                            String author = sc.next();
+                                            while (price <= 0) {
+                                                // validates price
+                                                System.out.println("Enter Price");
+                                                price = sc.nextDouble();
+                                                if (price <= 0) {
+                                                    System.out.println("Enter Price above 0");
+                                                }
+                                            }
+                                            System.out.println("Enter Stock");
+                                            int stock = sc.nextInt();
+                                            purchase.newCD(title, author, price, stock);
+                                            // creates new CD
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            case 3:
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // validates access
+                                    price = 0.0;
+                                    System.out.println("Enter Title");
+                                    String title = sc.next();
+                                    System.out.println("Enter Author");
+                                    String author = sc.next();
+                                    while (price <= 0) {
+                                        // validates price
+                                        System.out.println("Enter Price");
+                                        price = sc.nextDouble();
+                                        if (price <= 0) {
+                                            System.out.println("Enter Price above 0");
+                                        }
+                                    }
+                                    System.out.println("Enter Stock");
+                                    int stock = sc.nextInt();
+                                    purchase.newDVD(title, author, price, stock);
+                                    // creates new DVD
+                                } else {
+                                    System.out.println("Manager is required for this function");
+                                    System.out.println("Enter 1 for manager swipe and 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "new dvd", userKey)) { // validates access
+                                            price = 0.0;
+                                            System.out.println("Enter Title");
+                                            String title = sc.next();
+                                            System.out.println("Enter Author");
+                                            String author = sc.next();
+                                            while (price <= 0) {
+                                                // validates price
+                                                System.out.println("Enter Price");
+                                                price = sc.nextDouble();
+                                                if (price <= 0) {
+                                                    System.out.println("Enter Price above 0");
+                                                }
+                                            }
+                                            System.out.println("Enter Stock");
+                                            int stock = sc.nextInt();
+                                            purchase.newDVD(title, author, price, stock);
+                                            // creates new DVD
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            case 4:
+                                valid = false;
+                                int barcode = 0;
+                                int restockAmount = 0;
+                                if (Drawer1.validateManagerKey(userKey) == true) {
+                                    // validates access
+                                    while (!valid) {
+                                        // loops until valid barcode
+                                        System.out.println("Enter Barcode:");
+                                        barcode = sc.nextInt();
+                                        if (purchase.validateBarcode(barcode) == true) {
+                                            valid = true;
+                                        }
+                                    }
+                                    System.out.println("To subtract from inventory, enter negitive number");
+                                    System.out.println("Enter Restock Amount:");
+                                    restockAmount = sc.nextInt();
+                                    System.out.println(
+                                            "Total Updated Stock: " + purchase.restockProduct(barcode, restockAmount));
+                                    // restocks product or subtracts from inventory depending on value
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "update stock", userKey)) {
+                                            while (!valid) {
+                                                // loops until valid barcode
+                                                System.out.println("Enter Barcode:");
+                                                barcode = sc.nextInt();
+                                                if (purchase.validateBarcode(barcode) == true) {
+                                                    valid = true;
+                                                }
+                                            }
+                                            System.out.println("To subtract from inventory, enter negitive number");
+                                            System.out.println("Enter Restock Amount:");
+                                            restockAmount = sc.nextInt();
+                                            System.out.println("Total Updated Stock: "
+                                                    + purchase.restockProduct(barcode, restockAmount));
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            case 5:
+                                System.out.println("Total Inventory Value:" + purchase.inventoryValue());
+                                // prints value of all items in stock
+                                break;
+                            case 6:
+                                Drawer1.importPurchaseLog(purchase.condensePurchaseLog());
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // checks access level
+                                    System.out.println("Enter 1 to reset Till when report is ran");
+                                    int reset = sc.nextInt();
+                                    Drawer1.endOfDayTotal(reset, userKey);
+                                    EODRan = true;
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "run EOD", userKey)) {
+                                            System.out.println("Enter 1 to reset Till when report is ran");
+                                            int reset = sc.nextInt();
+                                            Drawer1.endOfDayTotal(reset, userKey);
+                                            EODRan = true;
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            // runs EOD routine
+                            case 7:
+
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // verifys access
+                                    EODRan = false;
+                                    valid = false;
+                                    while (!valid) {
+                                        // loops until amount is valid
+                                        System.out.println("Enter Amount:");
+                                        amount = sc.nextDouble();
+                                        if (amount <= 0) {
+                                            System.out.println(
+                                                    "Enter amount above 0. \nIf money needs to be taken out please perform paid out");
+                                        } else {
+                                            valid = true;
+                                        }
+                                    }
+                                    System.out.println("Enter Reason:");
+                                    reason = sc.next();
+                                    Drawer1.paidIn(amount, reason, userKey);
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "paid in", userKey)) {
+                                            valid = false;
+                                            while (!valid) {
+                                                // loops until amount is valid
+                                                System.out.println("Enter Amount:");
+                                                amount = sc.nextDouble();
+                                                if (amount <= 0) {
+                                                    System.out.println(
+                                                            "Enter amount above 0. \nIf money needs to be taken out please perform paid out");
+                                                } else {
+                                                    valid = true;
+                                                }
+                                            }
+                                            System.out.println("Enter Reason:");
+                                            reason = sc.next();
+                                            Drawer1.paidIn(amount, reason, userKey);
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            // performs paidIN
+                            case 8:
+
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // validates access
+                                    EODRan = false;
+                                    valid = false;
+                                    while (!valid) {
+                                        // loops until amount is valid
+                                        System.out.println("Enter Amount:");
+                                        amount = sc.nextDouble();
+                                        if (amount <= 0) {
+                                            System.out.println(
+                                                    "Enter amount above 0. \nIf money needs to be added please perform paid in");
+                                        } else {
+                                            valid = true;
+                                        }
+                                    }
+                                    System.out.println("Enter Reason:");
+                                    reason = sc.next();
+                                    Drawer1.paidOut(amount, reason, userKey);
+                                } else {
+                                    valid = false;
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "paid out", userKey)) {
+                                            while (!valid) {
+                                                // loops until amount is valid
+                                                System.out.println("Enter Amount:");
+                                                amount = sc.nextDouble();
+                                                if (amount <= 0) {
+                                                    System.out.println(
+                                                            "Enter amount above 0. \nIf money needs to be added please perform paid in");
+                                                } else {
+                                                    valid = true;
+                                                }
+                                            }
+                                            System.out.println("Enter Reason:");
+                                            reason = sc.next();
+                                            Drawer1.paidOut(amount, reason, userKey);
+
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            // performs paid out
+                            case 9:
+                                int newUserKey = 0;
+                                if (Drawer1.validateManagerKey(userKey) || userKey == 68403) {
+                                    // validates user access
+                                    boolean validCode = false;
+                                    while (!validCode) {
+                                        // Loops until valid user code is entered
+                                        System.out.println("Enter new User Code");
+                                        newUserKey = sc.nextInt();
+                                        if (Drawer1.validateAllKeys(newUserKey) == false) {
+                                            validCode = true;
+                                        } else {
+                                            System.out.println("User code is already in use");
+                                        }
+                                    }
+                                    System.out.println("Enter Name");
+                                    String newName = sc.next();
+                                    System.out.println("Enter true if employee is manager and false otherwise");
+                                    boolean isManager = sc.nextBoolean();
+                                    System.out.println("Enter Payrate");
+                                    double payRate = sc.nextDouble();
+                                    System.out.println("Enter true if uses MagCard and false otherwise");
+                                    boolean usesMag = sc.nextBoolean();
+                                    String cardNum = null;
+                                    if (usesMag) {
+                                        System.out.println("Swipe mag card");
+                                        cardNum = sc.next();
+                                    } else {
+                                        cardNum = "0";
+                                    }
+                                    Drawer1.addEmployee(newUserKey, isManager, newName, payRate, usesMag, cardNum);
+
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "new user", userKey)) {
+                                            boolean validCode = false;
+                                            while (!validCode) {
+                                                // Loops until valid user code is entered
+                                                System.out.println("Enter new User Code");
+                                                newUserKey = sc.nextInt();
+                                                if (Drawer1.validateAllKeys(newUserKey) == false) {
+                                                    validCode = true;
+                                                } else {
+                                                    System.out.println("User code is already in use");
+                                                }
+                                            }
+                                            System.out.println("Enter Name");
+                                            String newName = sc.next();
+                                            System.out.println("Enter true if employee is manager and false otherwise");
+                                            boolean isManager = sc.nextBoolean();
+                                            System.out.println("Enter Payrate");
+                                            double payRate = sc.nextDouble();
+                                            System.out.println("Enter true if uses MagCard and false otherwise");
+                                            boolean usesMag = sc.nextBoolean();
+                                            String cardNum = null;
+                                            if (usesMag) {
+                                                System.out.println("Swipe mag card");
+                                                cardNum = sc.next();
+                                            } else {
+                                                cardNum = "0";
+                                            }
+                                            Drawer1.addEmployee(newUserKey, isManager, newName, payRate, usesMag,
+                                                    cardNum);
+
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            // creates new user
+                            case 10:
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // validates user access
+                                    validNum = false;
+                                    System.out.println("Enter User Code to remove");
+                                    int oldUserKey = sc.nextInt();
+                                    if (Drawer1.validateAllKeys(oldUserKey) == true) {
+                                        Drawer1.removeEmployee(oldUserKey);
+                                    } else {
+                                        System.out.println("User number invalid");
+                                    }
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "remove user", userKey)) {
+                                            validNum = false;
+                                            System.out.println("Enter User Code to remove");
+                                            int oldUserKey = sc.nextInt();
+                                            if (Drawer1.validateAllKeys(oldUserKey) == true) {
+                                                Drawer1.removeEmployee(oldUserKey);
+                                            } else {
+                                                System.out.println("User number invalid");
+                                            }
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            // removes user
+                            case 11:
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    // validates access
+                                    System.out.println("Enter User Key to switch:");
+                                    int switchKey = sc.nextInt();
+                                    if (Drawer1.validateManagerKey(switchKey) == true) {
+                                        System.out.println("User already has manager access");
+                                    } else {
+
+                                        System.out.println("Switch Complete");
+                                    }
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "upgrade access", userKey)) {
+                                            System.out.println("Enter User Key to switch:");
+                                            int switchKey = sc.nextInt();
+                                            if (Drawer1.validateManagerKey(switchKey) == true) {
+                                                System.out.println("User already has manager access");
+                                            } else {
+
+                                                System.out.println("Switch Complete");
+                                            }
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            // gives user manager access
+                            case 12:
+                                if (Drawer1.validateManagerKey(userKey)) {
+
+                                    System.out.println("Enter User Key");
+                                    int user = sc.nextInt();
+                                    System.out.println("Swipe Card");
+                                    String card = sc.next();
+                                    Drawer1.assignMag(user, card);
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "assign mag card", userKey)) {
+                                            System.out.println("Enter User Key");
+                                            int user = sc.nextInt();
+                                            System.out.println("Swipe Card");
+                                            String card = sc.next();
+                                            Drawer1.assignMag(user, card);
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+                                break;
+                            // Assigns mag card
+                            case 13:
+                                if (Drawer1.validateManagerKey(userKey)) {
+                                    System.out.println("Enter Key");
+                                    int userDataKey = sc.nextInt();
+                                    Drawer1.getEmployeeData(userDataKey);
+                                } else {
+                                    System.out.println("Manager Access is required for this function");
+                                    System.out.println("Enter 1 to have manager swipe or 2 to abort");
+                                    managerSwipe = sc.nextInt();// Allows user to swipe manager card to give temporary
+                                                                // access to manager function
+                                    if (managerSwipe == 1) {
+                                        System.out.println("Please swipe User Mag Card");
+                                        mag = sc.next();
+                                        if (Drawer1.validateMagCardSolo(mag, "return employee data", userKey)) {
+                                            System.out.println("Enter Key");
+                                            int userDataKey = sc.nextInt();
+                                            Drawer1.getEmployeeData(userDataKey);
+                                        } else {
+                                            System.out.println("invalid mag card");
+                                        }
+                                    }
+                                }
+
+                                break;
+                            // gets employee data
+                            default:
+                                System.out.println("You have entered an invalid number");
+                        }
                         break;
                     case 10:
-                        //Requires entering manager key even if logged in as one. 
-                        //makes user realize they are exiting the program
-                        //68403 is used as a universal override to exit program without running EOD procedures
+                        // Requires entering manager key even if logged in as one.
+                        // makes user realize they are exiting the program
+                        // 68403 is used as a universal override to exit program without running EOD
+                        // procedures
                         System.out.println("Manager Key Required for exit.");
                         System.out.println("Please enter Manager Key:");
                         int tempXitKey = sc.nextInt();
@@ -982,10 +1016,10 @@ public class POS {
                         if (Drawer1.validateManagerKey(tempXitKey) || override) {
                             if (Drawer1.usesMag(tempXitKey)) {
                                 System.out.println("Please swipe User Mag Card");
-                                 mag = sc.next();
+                                mag = sc.next();
                                 if (Drawer1.validateMagCard(tempXitKey, mag)) {
                                     if (EODRan == true) {
-                                        //Validates access level to exit program
+                                        // Validates access level to exit program
                                         exit = true;
                                         purchase.saveData();
                                         Drawer1.saveEmployees();
@@ -998,7 +1032,7 @@ public class POS {
                                 }
                             } else {
                                 if (EODRan == true || override) {
-                                    //Validates access level to exit program
+                                    // Validates access level to exit program
                                     exit = true;
                                     purchase.saveData();
 
@@ -1011,11 +1045,11 @@ public class POS {
                             System.out.println("Invalid Access; Please Enter Manager Code");
                         }
 
-                        //exits program
+                        // exits program
                         break;
                     default:
                         System.out.println("Invalid Entry. \nPlease enter the number listed next to the function");
-                    //outputs if entered case is invalid
+                        // outputs if entered case is invalid
                 }
 
             } catch (InputMismatchException e) {
